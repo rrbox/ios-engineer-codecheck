@@ -39,21 +39,25 @@ class RepositorySearchController: UITableViewController, UISearchBarDelegate {
         
         word = searchBar.text!
         
-        if word.count != 0 {
-            url = "https://api.github.com/search/repositories?q=\(word!)"
-            task = URLSession.shared.dataTask(with: URL(string: url)!) { (data, res, err) in
-                if let jsonObject = try! JSONSerialization.jsonObject(with: data!) as? [String: Any] {
-                    if let items = jsonObject["items"] as? [[String: Any]] {
-                        self.repositories = items
-                        DispatchQueue.main.async {
-                            self.tableView.reloadData()
-                        }
-                    }
-                }
-            }
-            // これ呼ばなきゃリストが更新されません
-            task?.resume()
+        guard word.count != 0 else {
+            return
         }
+        
+        url = "https://api.github.com/search/repositories?q=\(word!)"
+        task = URLSession.shared.dataTask(with: URL(string: url)!) { (data, res, err) in
+            guard let jsonObject = try! JSONSerialization.jsonObject(with: data!) as? [String: Any] else {
+                return
+            }
+            guard let items = jsonObject["items"] as? [[String: Any]] else {
+                return
+            }
+            self.repositories = items
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+        // これ呼ばなきゃリストが更新されません
+        task?.resume()
         
     }
     

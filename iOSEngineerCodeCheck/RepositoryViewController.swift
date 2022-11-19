@@ -40,14 +40,23 @@ class RepositoryViewController: UIViewController {
         
         titleLabel.text = repository["full_name"] as? String
         
-        if let owner = repository["owner"] as? [String: Any] {
-            if let imgURL = owner["avatar_url"] as? String {
-                URLSession.shared.dataTask(with: URL(string: imgURL)!) { (data, res, err) in
-                    let image = UIImage(data: data!)!
-                    DispatchQueue.main.async {
-                        self.imageView.image = image
-                    }
-                }.resume()
+        guard let owner = repository["owner"] as? [String: Any] else {
+            return
+        }
+        guard let imgURL = owner["avatar_url"] as? String else {
+            return
+        }
+        
+        Task {
+            do {
+                let (data, _) = try await URLSession.shared.data(for: URLRequest(url: URL(string: imgURL)!))
+                
+                let image = UIImage(data: data)!
+                DispatchQueue.main.async {
+                    self.imageView.image = image
+                }
+            } catch {
+                print(error)
             }
         }
         
