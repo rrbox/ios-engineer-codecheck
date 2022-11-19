@@ -38,14 +38,7 @@ class RepositoryViewController: UIViewController {
         issuesLabel.text = "\(repository["open_issues_count"] as? Int ?? 0) open issues"
         
         Task {
-            let image = await {
-                guard let result = try? await self.getImage(url: self.getURL(from: repository)) else {
-                    return UIImage(systemName: "person.circle")
-                }
-                return result
-            }()
-            
-            self.imageView.image = image
+            try? await self.present(image: self.getImage(url: self.getURL(from: repository)))
         }
         
     }
@@ -66,6 +59,10 @@ class RepositoryViewController: UIViewController {
     func getImage(url: URL) async throws -> UIImage? {
         let (data, _) = try await URLSession.shared.data(for: URLRequest(url: url))
         return UIImage(data: data)
+    }
+    
+    func present(image: UIImage?) {
+        self.imageView.image = image ?? UIImage(systemName: "person.circle")
     }
     
 }
