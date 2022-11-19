@@ -8,6 +8,11 @@
 
 import UIKit
 
+enum RepositoryLoadError: Error {
+    case ownerDataLoadFailed
+    case imageURLLoadFailed
+}
+
 class RepositoryViewController: UIViewController {
     
     @IBOutlet weak var imageView: UIImageView!
@@ -38,6 +43,20 @@ class RepositoryViewController: UIViewController {
 //    func image(from repository: [String: Any]) -> UIImage {
 //
 //    }
+    
+    func getURL(from repository: [String: Any]) throws -> URL {
+        guard let owner = repository["owner"] as? [String: Any] else {
+            throw RepositoryLoadError.ownerDataLoadFailed
+        }
+        guard let imageURLString = owner["avatar_url"] as? String else {
+            throw RepositoryLoadError.imageURLLoadFailed
+        }
+        guard let result = URL(string: imageURLString) else {
+            throw RepositoryLoadError.imageURLLoadFailed
+        }
+        return result
+    }
+    
     func image(url: URL) async throws -> UIImage? {
         let (data, _) = try await URLSession.shared.data(for: URLRequest(url: url))
         return UIImage(data: data)
