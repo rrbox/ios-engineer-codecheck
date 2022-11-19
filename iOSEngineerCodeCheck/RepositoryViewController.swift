@@ -25,6 +25,7 @@ class RepositoryViewController: UIViewController {
         
         let repository = repositorySearch.repositories[repositorySearch.index]
         
+        titleLabel.text = repository["full_name"] as? String
         languageLabel.text = "Written in \(repository["language"] as? String ?? "")"
         starsLabel.text = "\(repository["stargazers_count"] as? Int ?? 0) stars"
         watchersLabel.text = "\(repository["wachers_count"] as? Int ?? 0) watchers"
@@ -37,8 +38,6 @@ class RepositoryViewController: UIViewController {
     func getImage() {
         
         let repository = repositorySearch.repositories[repositorySearch.index]
-        
-        titleLabel.text = repository["full_name"] as? String
         
         guard let owner = repository["owner"] as? [String: Any] else {
             return
