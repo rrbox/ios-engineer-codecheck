@@ -36,13 +36,20 @@ class RepositoryViewController: UIViewController {
         watchersLabel.text = "\(repository["wachers_count"] as? Int ?? 0) watchers"
         forksLabel.text = "\(repository["forks_count"] as? Int ?? 0) forks"
         issuesLabel.text = "\(repository["open_issues_count"] as? Int ?? 0) open issues"
-        getImage(repository: repository)
+//        getImage(repository: repository)
+        
+        Task {
+            let image = await {
+                guard let result = try? await self.image(url: self.getURL(from: repository)) else {
+                    return UIImage(systemName: "person.circle")
+                }
+                return result
+            }()
+            
+            self.imageView.image = image
+        }
         
     }
-    
-//    func image(from repository: [String: Any]) -> UIImage {
-//
-//    }
     
     func getURL(from repository: [String: Any]) throws -> URL {
         guard let owner = repository["owner"] as? [String: Any] else {
