@@ -47,12 +47,18 @@ class RepositoryViewController: UIViewController {
             return
         }
         
-        URLSession.shared.dataTask(with: URL(string: imgURL)!) { (data, res, err) in
-            let image = UIImage(data: data!)!
-            DispatchQueue.main.async {
-                self.imageView.image = image
+        Task {
+            do {
+                let (data, _) = try await URLSession.shared.data(for: URLRequest(url: URL(string: imgURL)!))
+                
+                let image = UIImage(data: data)!
+                DispatchQueue.main.async {
+                    self.imageView.image = image
+                }
+            } catch {
+                print(error)
             }
-        }.resume()
+        }
         
     }
     
