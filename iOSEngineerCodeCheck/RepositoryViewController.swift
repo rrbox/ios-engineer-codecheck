@@ -31,13 +31,11 @@ class RepositoryViewController: UIViewController {
         watchersLabel.text = "\(repository["wachers_count"] as? Int ?? 0) watchers"
         forksLabel.text = "\(repository["forks_count"] as? Int ?? 0) forks"
         issuesLabel.text = "\(repository["open_issues_count"] as? Int ?? 0) open issues"
-        getImage()
+        getImage(repository: repository)
         
     }
     
-    func getImage() {
-        
-        let repository = repositorySearch.repositories[repositorySearch.index]
+    func getImage(repository: [String : Any]) {
         
         guard let owner = repository["owner"] as? [String: Any] else {
             return
