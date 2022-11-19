@@ -35,6 +35,14 @@ class RepositoryViewController: UIViewController {
         
     }
     
+//    func image(from repository: [String: Any]) -> UIImage {
+//
+//    }
+    func image(url: URL) async throws -> UIImage? {
+        let (data, _) = try await URLSession.shared.data(for: URLRequest(url: url))
+        return UIImage(data: data)
+    }
+    
     func getImage(repository: [String : Any]) {
         
         guard let owner = repository["owner"] as? [String: Any] else {
