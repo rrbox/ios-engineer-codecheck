@@ -135,6 +135,30 @@
                             <constraint firstItem="oOe-O2-3RS" firstAttribute="centerX" secondItem="4q1-pG-WSB" secondAttribute="centerX" id="kVV-YK-ePr"/>
                             <constraint firstItem="Iim-eb-8Ad" firstAttribute="centerY" secondItem="srK-fe-i1b" secondAttribute="centerY" multiplier="0.7" id="ruB-l0-4VM"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="IgU-EN-fM3"/>
+                                <exclude reference="EMR-2C-CyU"/>
+                                <exclude reference="ruB-l0-4VM"/>
+                                <exclude reference="G2L-KM-330"/>
+                                <exclude reference="Ght-Nb-HEu"/>
+                                <exclude reference="dPu-j0-Myp"/>
+                                <exclude reference="i0J-Kl-ewv"/>
+                                <exclude reference="kVV-YK-ePr"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="constraints">
+                                <include reference="IgU-EN-fM3"/>
+                                <include reference="EMR-2C-CyU"/>
+                                <include reference="ruB-l0-4VM"/>
+                                <include reference="G2L-KM-330"/>
+                                <include reference="Ght-Nb-HEu"/>
+                                <include reference="dPu-j0-Myp"/>
+                                <include reference="i0J-Kl-ewv"/>
+                                <include reference="kVV-YK-ePr"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="J6o-vL-S1z"/>
                     <connections>
