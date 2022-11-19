@@ -8,6 +8,11 @@
 
 import UIKit
 
+enum RepositoryLoadError: Error {
+    case ownerDataLoadFailed
+    case imageURLLoadFailed
+}
+
 class RepositoryViewController: UIViewController {
     
     @IBOutlet weak var imageView: UIImageView!
@@ -25,41 +30,39 @@ class RepositoryViewController: UIViewController {
         
         let repository = repositorySearch.repositories[repositorySearch.index]
         
+        titleLabel.text = repository["full_name"] as? String
         languageLabel.text = "Written in \(repository["language"] as? String ?? "")"
         starsLabel.text = "\(repository["stargazers_count"] as? Int ?? 0) stars"
         watchersLabel.text = "\(repository["wachers_count"] as? Int ?? 0) watchers"
         forksLabel.text = "\(repository["forks_count"] as? Int ?? 0) forks"
         issuesLabel.text = "\(repository["open_issues_count"] as? Int ?? 0) open issues"
-        getImage()
+        
+        Task {
+            try? await self.present(image: self.getImage(url: self.getURL(from: repository)))
+        }
         
     }
     
-    func getImage() {
-        
-        let repository = repositorySearch.repositories[repositorySearch.index]
-        
-        titleLabel.text = repository["full_name"] as? String
-        
+    func getURL(from repository: [String: Any]) throws -> URL {
         guard let owner = repository["owner"] as? [String: Any] else {
-            return
+            throw RepositoryLoadError.ownerDataLoadFailed
         }
-        guard let imgURL = owner["avatar_url"] as? String else {
-            return
+        guard let imageURLString = owner["avatar_url"] as? String else {
+            throw RepositoryLoadError.imageURLLoadFailed
         }
-        
-        Task {
-            do {
-                let (data, _) = try await URLSession.shared.data(for: URLRequest(url: URL(string: imgURL)!))
-                
-                let image = UIImage(data: data)!
-                DispatchQueue.main.async {
-                    self.imageView.image = image
-                }
-            } catch {
-                print(error)
-            }
+        guard let result = URL(string: imageURLString) else {
+            throw RepositoryLoadError.imageURLLoadFailed
         }
-        
+        return result
+    }
+    
+    func getImage(url: URL) async throws -> UIImage? {
+        let (data, _) = try await URLSession.shared.data(for: URLRequest(url: url))
+        return UIImage(data: data)
+    }
+    
+    func present(image: UIImage?) {
+        self.imageView.image = image ?? UIImage(systemName: "person.circle")
     }
     
 }
