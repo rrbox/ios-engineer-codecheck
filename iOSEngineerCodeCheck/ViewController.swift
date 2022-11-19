@@ -9,7 +9,7 @@
 import UIKit
 
 class ViewController: UITableViewController, UISearchBarDelegate {
-
+    
     @IBOutlet weak var searchBar: UISearchBar!
     
     var repositories: [[String: Any]]=[]
@@ -45,15 +45,15 @@ class ViewController: UITableViewController, UISearchBarDelegate {
             task = URLSession.shared.dataTask(with: URL(string: url)!) { (data, res, err) in
                 if let jsonObject = try! JSONSerialization.jsonObject(with: data!) as? [String: Any] {
                     if let items = jsonObject["items"] as? [[String: Any]] {
-                    self.repositories = items
+                        self.repositories = items
                         DispatchQueue.main.async {
                             self.tableView.reloadData()
                         }
                     }
                 }
             }
-        // これ呼ばなきゃリストが更新されません
-        task?.resume()
+            // これ呼ばなきゃリストが更新されません
+            task?.resume()
         }
         
     }
