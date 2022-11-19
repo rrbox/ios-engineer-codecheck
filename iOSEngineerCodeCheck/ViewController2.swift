@@ -11,11 +11,8 @@ import UIKit
 class ViewController2: UIViewController {
     
     @IBOutlet weak var imageView: UIImageView!
-    
     @IBOutlet weak var titleLabel: UILabel!
-    
     @IBOutlet weak var languageLabel: UILabel!
-    
     @IBOutlet weak var starsLabel: UILabel!
     @IBOutlet weak var watchersLabel: UILabel!
     @IBOutlet weak var forksLabel: UILabel!

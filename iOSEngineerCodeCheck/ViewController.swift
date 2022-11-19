@@ -13,7 +13,6 @@ class ViewController: UITableViewController, UISearchBarDelegate {
     @IBOutlet weak var searchBar: UISearchBar!
     
     var repositories: [[String: Any]]=[]
-    
     var task: URLSessionTask?
     var word: String!
     var url: String!
