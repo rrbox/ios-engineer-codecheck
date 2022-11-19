@@ -36,7 +36,6 @@ class RepositoryViewController: UIViewController {
         watchersLabel.text = "\(repository["wachers_count"] as? Int ?? 0) watchers"
         forksLabel.text = "\(repository["forks_count"] as? Int ?? 0) forks"
         issuesLabel.text = "\(repository["open_issues_count"] as? Int ?? 0) open issues"
-//        getImage(repository: repository)
         
         Task {
             let image = await {
@@ -67,30 +66,6 @@ class RepositoryViewController: UIViewController {
     func image(url: URL) async throws -> UIImage? {
         let (data, _) = try await URLSession.shared.data(for: URLRequest(url: url))
         return UIImage(data: data)
-    }
-    
-    func getImage(repository: [String : Any]) {
-        
-        guard let owner = repository["owner"] as? [String: Any] else {
-            return
-        }
-        guard let imgURL = owner["avatar_url"] as? String else {
-            return
-        }
-        
-        Task {
-            do {
-                let (data, _) = try await URLSession.shared.data(for: URLRequest(url: URL(string: imgURL)!))
-                
-                let image = UIImage(data: data)!
-                DispatchQueue.main.async {
-                    self.imageView.image = image
-                }
-            } catch {
-                print(error)
-            }
-        }
-        
     }
     
 }
