@@ -30,8 +30,10 @@ class RepositoryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // リポジトリ検索コントローラから, 選択したリポジトリを取得します.
         let repository = repositorySearch.repositories[repositorySearch.index]
         
+        // リポジトリの要素を対応するプロパティで表示します.
         titleLabel.text = repository["full_name"] as? String
         languageLabel.text = "Written in \(repository["language"] as? String ?? "")"
         starsLabel.text = "\(repository["stargazers_count"] as? Int ?? 0) stars"
@@ -49,9 +51,12 @@ class RepositoryViewController: UIViewController {
     /// - Parameter repository: JSON から生成したリポジトリデータの辞書です.
     /// - Returns: Owner のアバター画像の URL です.
     func getURL(from repository: [String: Any]) throws -> URL {
+        
+        // リポジトリからアバター画像を取り出すために, owner key のオブジェクトを取り出します.
         guard let owner = repository["owner"] as? [String: Any] else {
             throw RepositoryLoadError.ownerDataLoadFailed
         }
+        
         guard let imageURLString = owner["avatar_url"] as? String else {
             throw RepositoryLoadError.imageURLLoadFailed
         }
