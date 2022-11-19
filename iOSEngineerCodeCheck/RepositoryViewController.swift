@@ -42,7 +42,9 @@ class RepositoryViewController: UIViewController {
         issuesLabel.text = "\(repository["open_issues_count"] as? Int ?? 0) open issues"
         
         Task {
-            try? await self.present(image: self.getImage(url: self.getURL(from: repository)))
+            try? await self.present(
+                image: self.getImage(url: self.getURL(from: repository)),
+                defaultImage: UIImage(systemName: "person.circle"))
         }
         
     }
@@ -76,8 +78,8 @@ class RepositoryViewController: UIViewController {
     
     /// ViewController に画像を表示します.
     /// - Parameter image: UIImage
-    func present(image: UIImage?) {
-        self.imageView.image = image ?? UIImage(systemName: "person.circle")
+    func present(image: UIImage?, defaultImage: UIImage? = UIImage(systemName: "exclamationmark.square.fill")) {
+        self.imageView.image = image ?? defaultImage
     }
     
 }
