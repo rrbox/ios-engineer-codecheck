@@ -61,7 +61,7 @@ class RepositorySearchController: UITableViewController, UISearchBarDelegate {
         
         if segue.identifier == "Detail" {
             let destination = segue.destination as! RepositoryViewController
-            destination.vc1 = self
+            destination.repositorySearch = self
         }
         
     }
