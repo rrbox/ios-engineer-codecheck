@@ -39,7 +39,7 @@ class RepositoryViewController: UIViewController {
         
         Task {
             let image = await {
-                guard let result = try? await self.image(url: self.getURL(from: repository)) else {
+                guard let result = try? await self.getImage(url: self.getURL(from: repository)) else {
                     return UIImage(systemName: "person.circle")
                 }
                 return result
@@ -63,7 +63,7 @@ class RepositoryViewController: UIViewController {
         return result
     }
     
-    func image(url: URL) async throws -> UIImage? {
+    func getImage(url: URL) async throws -> UIImage? {
         let (data, _) = try await URLSession.shared.data(for: URLRequest(url: url))
         return UIImage(data: data)
     }
