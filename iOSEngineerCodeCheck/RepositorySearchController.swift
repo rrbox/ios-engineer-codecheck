@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// Repository を検索し, 該当するリポジトリを一覧で表示するコントローラーです.
 class RepositorySearchController: UITableViewController, UISearchBarDelegate {
     
     @IBOutlet weak var searchBar: UISearchBar!
@@ -25,6 +26,8 @@ class RepositorySearchController: UITableViewController, UISearchBarDelegate {
         searchBar.delegate = self
     }
     
+    /// ユーザーが検索のために文字入力を開始したときの処理です.
+    /// - note: デフォルトで表示しているテキストを消去します.
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         // ↓こうすれば初期のテキストを消せる
         searchBar.text = ""
@@ -35,6 +38,7 @@ class RepositorySearchController: UITableViewController, UISearchBarDelegate {
         task?.cancel()
     }
     
+    /// ユーザーが文字入力を終え, 検索を開始したときの処理です.
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
         word = searchBar.text!
@@ -61,6 +65,7 @@ class RepositorySearchController: UITableViewController, UISearchBarDelegate {
         
     }
     
+    /// 画面遷移することを次の ViewController に通知します.
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "Detail" {
@@ -70,10 +75,13 @@ class RepositorySearchController: UITableViewController, UISearchBarDelegate {
         
     }
     
+    
+    /// TableView の row の数を設定します.
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return repositories.count
     }
     
+    /// TableViewCell を初期化します.
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = UITableViewCell()
@@ -85,6 +93,7 @@ class RepositorySearchController: UITableViewController, UISearchBarDelegate {
         
     }
     
+    /// Table のアイテムを選択したときの処理です.
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // 画面遷移時に呼ばれる
         index = indexPath.row

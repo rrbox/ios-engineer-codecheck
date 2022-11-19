@@ -8,11 +8,13 @@
 
 import UIKit
 
+/// ``RepositoryViewController`` で画像を取得する際に使用されるエラーです.
 enum RepositoryLoadError: Error {
     case ownerDataLoadFailed
     case imageURLLoadFailed
 }
 
+/// 特定のリポジトリについての情報を表示する ViewController です.
 class RepositoryViewController: UIViewController {
     
     @IBOutlet weak var imageView: UIImageView!
@@ -43,6 +45,9 @@ class RepositoryViewController: UIViewController {
         
     }
     
+    /// リポジトリデータの辞書から, Owner のアバター画像の URL を取得します.
+    /// - Parameter repository: JSON から生成したリポジトリデータの辞書です.
+    /// - Returns: Owner のアバター画像の URL です.
     func getURL(from repository: [String: Any]) throws -> URL {
         guard let owner = repository["owner"] as? [String: Any] else {
             throw RepositoryLoadError.ownerDataLoadFailed
@@ -56,11 +61,16 @@ class RepositoryViewController: UIViewController {
         return result
     }
     
+    /// URL から画像オブジェクトを作成します.
+    /// - Parameter url: 画像の URL を指定してください.
+    /// - Returns: UIImage を作成します.
     func getImage(url: URL) async throws -> UIImage? {
         let (data, _) = try await URLSession.shared.data(for: URLRequest(url: url))
         return UIImage(data: data)
     }
     
+    /// ViewController に画像を表示します.
+    /// - Parameter image: UIImage
     func present(image: UIImage?) {
         self.imageView.image = image ?? UIImage(systemName: "person.circle")
     }
