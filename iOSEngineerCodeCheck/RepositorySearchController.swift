@@ -42,6 +42,10 @@ class RepositorySearchController: UITableViewController, UISearchBarDelegate {
         self.task?.cancel()
     }
     
+    func getQueryURL(query: String) -> URL? {
+        URL(string: "https://api.github.com/search/repositories?q=\(query)")
+    }
+    
     func getRepositories(from url: URL) async throws -> [[String: Any]] {
         let (data, _) = try await URLSession.shared.data(for: URLRequest(url: url))
         guard let jsonObject = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
