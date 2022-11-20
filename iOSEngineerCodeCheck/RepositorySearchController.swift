@@ -59,6 +59,14 @@ class RepositorySearchController: UITableViewController, UISearchBarDelegate {
         return items
     }
     
+    func present(repositories: [[String: Any]]) {
+        self.repositories = repositories
+        // データが更新されるため, TableView の表示を更新します.
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
+    
     /// ユーザーが文字入力を終え, 検索を開始したときの処理です.
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
