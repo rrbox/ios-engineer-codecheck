@@ -34,19 +34,7 @@ class RepositoryViewController: UIViewController {
 //        guard let index = self.selectedRepository?.index else { return }
         guard let repository = self.selectedRepository else { return }
         
-        // リポジトリの要素を対応するプロパティで表示します.
-        self.titleLabel.text = repository.fullName
-        self.languageLabel.text = "Written in \(repository.language ?? "other")"
-        self.starsLabel.text = "\(repository.stargazersCount) stars"
-        self.watchersLabel.text = "\(repository.watchersCount) watchers"
-        self.forksLabel.text = "\(repository.forksCount) forks"
-        self.issuesLabel.text = "\(repository.openIssuesCount) open issues"
-        
-        Task {
-            try? await self.present(
-                image: self.getImage(url: self.getURL(from: repository)),
-                defaultImage: UIImage(systemName: "person.circle"))
-        }
+        self.present(repository: repository)
         
     }
     
@@ -74,6 +62,23 @@ class RepositoryViewController: UIViewController {
     /// - Parameter image: UIImage
     func present(image: UIImage?, defaultImage: UIImage? = UIImage(systemName: "exclamationmark.square.fill")) {
         self.imageView.image = image ?? defaultImage
+    }
+    
+    /// リポジトリデータを表示するメソッドです.
+    func present(repository: Repository) {
+        // リポジトリの要素を対応するプロパティで表示します.
+        self.titleLabel.text = repository.fullName
+        self.languageLabel.text = "Written in \(repository.language ?? "other")"
+        self.starsLabel.text = "\(repository.stargazersCount) stars"
+        self.watchersLabel.text = "\(repository.watchersCount) watchers"
+        self.forksLabel.text = "\(repository.forksCount) forks"
+        self.issuesLabel.text = "\(repository.openIssuesCount) open issues"
+        
+        Task {
+            try? await self.present(
+                image: self.getImage(url: self.getURL(from: repository)),
+                defaultImage: UIImage(systemName: "person.circle"))
+        }
     }
     
 }
