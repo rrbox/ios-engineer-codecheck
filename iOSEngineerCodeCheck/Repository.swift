@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct User: Codable {
+struct Owner: Codable {
     var avatarUrl: String = ""
 }
 
@@ -18,7 +18,7 @@ struct Repository: Codable {
     var watchersCount: Int = 0
     var forksCount: Int = 0
     var openIssuesCount: Int = 0
-    var owner: User
+    var owner: Owner
 }
 
 struct Repositories: Codable {
