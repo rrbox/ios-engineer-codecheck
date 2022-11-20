@@ -6,3 +6,21 @@
 //
 
 import Foundation
+
+struct User: Codable {
+    var avatarUrl: String = ""
+}
+
+struct Repository: Codable {
+    var fullName: String = ""
+    var language: String = ""
+    var stargazersCount: Int = 0
+    var watchersCount: Int = 0
+    var forksCount: Int = 0
+    var openIssuesCount: Int = 0
+    var owner: User
+}
+
+struct Repositories: Codable {
+    var items: [Repository] = []
+}
