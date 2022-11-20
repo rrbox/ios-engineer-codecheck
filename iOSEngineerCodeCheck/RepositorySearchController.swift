@@ -21,7 +21,6 @@ class RepositorySearchController: UITableViewController, UISearchBarDelegate {
     
     var repositories = Repositories()
     var task: Task<(), Never>?
-    var word: String?
     var index: Int?
     
     override func viewDidLoad() {
@@ -70,9 +69,7 @@ class RepositorySearchController: UITableViewController, UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
         // サーチバーに入力したテキストをプロパティにセットします.
-        self.word = searchBar.text
-        
-        guard let word = self.word else { return }
+        guard let word = searchBar.text else { return }
         
         // 入力がなかった場合はリポジトリデータを取得しません.
         guard word.count != 0 else { return }
