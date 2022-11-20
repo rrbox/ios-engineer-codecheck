@@ -42,10 +42,12 @@ class RepositorySearchController: UITableViewController, UISearchBarDelegate {
         self.task?.cancel()
     }
     
+    /// リポジトリを検索するクエリを生成するメソッドです.
     func getSearchQueryURL(query: String) -> URL? {
         URL(string: "https://api.github.com/search/repositories?q=\(query)")
     }
     
+    /// URL で通信し, リポジトリの値(辞書型)を取得します.
     func getRepositories(from url: URL) async throws -> [[String: Any]] {
         let (data, _) = try await URLSession.shared.data(for: URLRequest(url: url))
         guard let jsonObject = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
@@ -59,6 +61,7 @@ class RepositorySearchController: UITableViewController, UISearchBarDelegate {
         return items
     }
     
+    /// 辞書型のリポジトリデータをテーブルビューに表示します.
     func present(repositories: [[String: Any]]) {
         self.repositories = repositories
         // データが更新されるため, TableView の表示を更新します.
