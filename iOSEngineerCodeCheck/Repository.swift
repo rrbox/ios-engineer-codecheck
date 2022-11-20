@@ -13,7 +13,7 @@ struct Owner: Codable {
 
 struct Repository: Codable {
     var fullName: String = ""
-    var language: String = ""
+    var language: String?
     var stargazersCount: Int = 0
     var watchersCount: Int = 0
     var forksCount: Int = 0

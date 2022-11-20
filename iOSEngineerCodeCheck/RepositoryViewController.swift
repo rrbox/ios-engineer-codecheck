@@ -36,7 +36,7 @@ class RepositoryViewController: UIViewController {
         
         // リポジトリの要素を対応するプロパティで表示します.
         self.titleLabel.text = repository.fullName
-        self.languageLabel.text = "Written in \(repository.language)"
+        self.languageLabel.text = "Written in \(repository.language ?? "other")"
         self.starsLabel.text = "\(repository.stargazersCount) stars"
         self.watchersLabel.text = "\(repository.watchersCount) watchers"
         self.forksLabel.text = "\(repository.forksCount) forks"
