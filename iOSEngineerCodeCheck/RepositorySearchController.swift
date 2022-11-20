@@ -22,8 +22,8 @@ class RepositorySearchController: UITableViewController, UISearchBarDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        searchBar.text = "GitHubのリポジトリを検索できるよー"
-        searchBar.delegate = self
+        self.searchBar.text = "GitHubのリポジトリを検索できるよー"
+        self.searchBar.delegate = self
     }
     
     /// ユーザーが検索のために文字入力を開始したときの処理です.
@@ -35,23 +35,23 @@ class RepositorySearchController: UITableViewController, UISearchBarDelegate {
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        task?.cancel()
+        self.task?.cancel()
     }
     
     /// ユーザーが文字入力を終え, 検索を開始したときの処理です.
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
         // サーチバーに入力したテキストをプロパティにセットします.
-        word = searchBar.text!
+        self.word = searchBar.text!
         
         // 入力がなかった場合はリポジトリデータを取得しません.
-        guard word.count != 0 else {
+        guard self.word.count != 0 else {
             return
         }
         
         // URL を作成し, リポジトリの一覧の JSON を GET します.
-        url = "https://api.github.com/search/repositories?q=\(word!)"
-        task = URLSession.shared.dataTask(with: URL(string: url)!) { (data, res, err) in
+        self.url = "https://api.github.com/search/repositories?q=\(self.word!)"
+        self.task = URLSession.shared.dataTask(with: URL(string: self.url)!) { (data, res, err) in
             guard let jsonObject = try! JSONSerialization.jsonObject(with: data!) as? [String: Any] else {
                 return
             }
@@ -64,7 +64,7 @@ class RepositorySearchController: UITableViewController, UISearchBarDelegate {
             }
         }
         // 作成したタスクを実行します.
-        task?.resume()
+        self.task?.resume()
         
     }
     
@@ -81,7 +81,7 @@ class RepositorySearchController: UITableViewController, UISearchBarDelegate {
     
     /// TableView の row の数を設定します.
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return repositories.count
+        return self.repositories.count
     }
     
     /// TableViewCell を初期化します.
@@ -89,7 +89,7 @@ class RepositorySearchController: UITableViewController, UISearchBarDelegate {
         
         // TableViewCell をカスタマイズします.
         let cell = UITableViewCell()
-        let repository = repositories[indexPath.row]
+        let repository = self.repositories[indexPath.row]
         cell.textLabel?.text = repository["full_name"] as? String ?? ""
         cell.detailTextLabel?.text = repository["language"] as? String ?? ""
         cell.tag = indexPath.row
@@ -100,7 +100,7 @@ class RepositorySearchController: UITableViewController, UISearchBarDelegate {
     /// Table のアイテムを選択したときの処理です.
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        index = indexPath.row
+        self.index = indexPath.row
         // 画面を遷移します.
         performSegue(withIdentifier: "Detail", sender: self)
         
