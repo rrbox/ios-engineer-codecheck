@@ -11,6 +11,7 @@ import UIKit
 enum RepositoriesArrayGetError: Error {
     case convertToDictionaryFailed
     case getRepotioriesArrayFromDictionaryFailed
+    case taskFailed
 }
 
 /// Repository を検索し, 該当するリポジトリを一覧で表示するコントローラーです.
@@ -19,7 +20,7 @@ class RepositorySearchController: UITableViewController, UISearchBarDelegate {
     @IBOutlet weak var searchBar: UISearchBar!
     
     var repositories: [[String: Any]] = []
-    var task: URLSessionTask?
+    var task: Task<(), Never>?
     var word: String?
     var index: Int?
     
@@ -84,26 +85,15 @@ class RepositorySearchController: UITableViewController, UISearchBarDelegate {
         }
         
         // URL を作成し, リポジトリの一覧の JSON を GET します.
-        guard let url = URL(string: "https://api.github.com/search/repositories?q=\(word)") else { return }
-        self.task = URLSession.shared.dataTask(with: url) { (data, res, err) in
-            
-            guard let jsonObject = try? JSONSerialization.jsonObject(with: data!) as? [String: Any] else {
-                // 受け取ったデータを JSONObject に変換できなかった際の処理です.
-                return
-            }
-            guard let items = jsonObject["items"] as? [[String: Any]] else {
-                // 辞書に "items" の value がなかった際の処理です.
-                return
-            }
-            
-            self.repositories = items
-            // データが更新されたため, TableView の表示を更新します.
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
+        guard let url = self.getSearchQueryURL(query: word) else { return }
+        self.task = Task {
+            do {
+                let repositories = try await self.getRepositories(from: url)
+                self.present(repositories: repositories)
+            } catch {
+                print(error)
             }
         }
-        // 作成したタスクを実行します.
-        self.task?.resume()
         
     }
     
