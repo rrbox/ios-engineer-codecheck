@@ -80,9 +80,7 @@ class RepositorySearchController: UITableViewController, UISearchBarDelegate {
         guard let word = self.word else { return }
         
         // 入力がなかった場合はリポジトリデータを取得しません.
-        guard word.count != 0 else {
-            return
-        }
+        guard word.count != 0 else { return }
         
         // URL を作成し, リポジトリの一覧の JSON を GET します.
         guard let url = self.getSearchQueryURL(query: word) else { return }
