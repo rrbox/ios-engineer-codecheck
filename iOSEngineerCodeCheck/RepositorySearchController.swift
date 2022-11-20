@@ -15,9 +15,8 @@ class RepositorySearchController: UITableViewController, UISearchBarDelegate {
     
     var repositories: [[String: Any]] = []
     var task: URLSessionTask?
-    var word: String!
-    var url: String!
-    var index: Int!
+    var word: String?
+    var index: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,23 +41,30 @@ class RepositorySearchController: UITableViewController, UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
         // サーチバーに入力したテキストをプロパティにセットします.
-        self.word = searchBar.text!
+        self.word = searchBar.text
+        
+        guard let word = self.word else { return }
         
         // 入力がなかった場合はリポジトリデータを取得しません.
-        guard self.word.count != 0 else {
+        guard word.count != 0 else {
             return
         }
         
         // URL を作成し, リポジトリの一覧の JSON を GET します.
-        self.url = "https://api.github.com/search/repositories?q=\(self.word!)"
-        self.task = URLSession.shared.dataTask(with: URL(string: self.url)!) { (data, res, err) in
-            guard let jsonObject = try! JSONSerialization.jsonObject(with: data!) as? [String: Any] else {
+        guard let url = URL(string: "https://api.github.com/search/repositories?q=\(word)") else { return }
+        self.task = URLSession.shared.dataTask(with: url) { (data, res, err) in
+            
+            guard let jsonObject = try? JSONSerialization.jsonObject(with: data!) as? [String: Any] else {
+                // 受け取ったデータを JSONObject に変換できなかった際の処理です.
                 return
             }
             guard let items = jsonObject["items"] as? [[String: Any]] else {
+                // 辞書に "items" の value がなかった際の処理です.
                 return
             }
+            
             self.repositories = items
+            // データが更新されたため, TableView の表示を更新します.
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
