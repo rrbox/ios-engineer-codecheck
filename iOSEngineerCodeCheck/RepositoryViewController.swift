@@ -14,6 +14,10 @@ enum RepositoryLoadError: Error {
     case imageURLLoadFailed
 }
 
+class RepositoryView: UIView {
+    
+}
+
 /// 特定のリポジトリについての情報を表示する ViewController です.
 class RepositoryViewController: UIViewController {
     
@@ -24,6 +28,7 @@ class RepositoryViewController: UIViewController {
     @IBOutlet weak var watchersLabel: UILabel!
     @IBOutlet weak var forksLabel: UILabel!
     @IBOutlet weak var issuesLabel: UILabel!
+    @IBOutlet weak var repositoryView: RepositoryView!
     
     var selectedRepository: Repository?
     
