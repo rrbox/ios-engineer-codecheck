@@ -31,7 +31,8 @@ class RepositoryViewController: UIViewController {
         super.viewDidLoad()
         
         // リポジトリ検索コントローラから, 選択したリポジトリを取得します.
-        let repository = self.repositorySearch.repositories[repositorySearch.index]
+        guard let index = self.repositorySearch.index else { return }
+        let repository = self.repositorySearch.repositories[index]
         
         // リポジトリの要素を対応するプロパティで表示します.
         self.titleLabel.text = repository["full_name"] as? String
