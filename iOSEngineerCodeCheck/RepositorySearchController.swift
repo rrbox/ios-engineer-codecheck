@@ -53,13 +53,18 @@ class RepositorySearchController: UITableViewController, UISearchBarDelegate {
         // URL を作成し, リポジトリの一覧の JSON を GET します.
         guard let url = URL(string: "https://api.github.com/search/repositories?q=\(word)") else { return }
         self.task = URLSession.shared.dataTask(with: url) { (data, res, err) in
+            
             guard let jsonObject = try? JSONSerialization.jsonObject(with: data!) as? [String: Any] else {
+                // 受け取ったデータを JSONObject に変換できなかった際の処理です.
                 return
             }
             guard let items = jsonObject["items"] as? [[String: Any]] else {
+                // 辞書に "items" の value がなかった際の処理です.
                 return
             }
+            
             self.repositories = items
+            // データが更新されたため, TableView の表示を更新します.
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
