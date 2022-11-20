@@ -16,11 +16,6 @@ enum RepositoryLoadError: Error {
 
 class RepositoryView: UIView {
     
-}
-
-/// 特定のリポジトリについての情報を表示する ViewController です.
-class RepositoryViewController: UIViewController {
-    
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var languageLabel: UILabel!
@@ -28,20 +23,6 @@ class RepositoryViewController: UIViewController {
     @IBOutlet weak var watchersLabel: UILabel!
     @IBOutlet weak var forksLabel: UILabel!
     @IBOutlet weak var issuesLabel: UILabel!
-    @IBOutlet weak var repositoryView: RepositoryView!
-    
-    var selectedRepository: Repository?
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        // リポジトリ検索コントローラから, 選択したリポジトリを取得します.
-//        guard let index = self.selectedRepository?.index else { return }
-        guard let repository = self.selectedRepository else { return }
-        
-        self.present(repository: repository)
-        
-    }
     
     /// リポジトリデータの辞書から, Owner のアバター画像の URL を取得します.
     /// - Parameter repository: JSON から生成したリポジトリデータの辞書です.
@@ -84,6 +65,26 @@ class RepositoryViewController: UIViewController {
                 image: self.getImage(url: self.getURL(from: repository)),
                 defaultImage: UIImage(systemName: "person.circle"))
         }
+    }
+}
+
+/// 特定のリポジトリについての情報を表示する ViewController です.
+class RepositoryViewController: UIViewController {
+    
+    
+    @IBOutlet weak var repositoryView: RepositoryView!
+    
+    var selectedRepository: Repository?
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        // リポジトリ検索コントローラから, 選択したリポジトリを取得します.
+//        guard let index = self.selectedRepository?.index else { return }
+        guard let repository = self.selectedRepository else { return }
+        
+        self.repositoryView.present(repository: repository)
+        
     }
     
 }
