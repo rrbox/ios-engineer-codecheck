@@ -19,7 +19,7 @@ class RepositorySearchController: UITableViewController, UISearchBarDelegate {
     
     @IBOutlet weak var searchBar: UISearchBar!
     
-    var repositories: [[String: Any]] = []
+    var repositories = Repositories()
     var task: Task<(), Never>?
     var word: String?
     var index: Int?
@@ -49,21 +49,24 @@ class RepositorySearchController: UITableViewController, UISearchBarDelegate {
     }
     
     /// URL で通信し, リポジトリの値(辞書型)を取得します.
-    func getRepositories(from url: URL) async throws -> [[String: Any]] {
+    func getRepositories(from url: URL) async throws -> Repositories {
         let (data, _) = try await URLSession.shared.data(for: URLRequest(url: url))
-        guard let jsonObject = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
-            // 受け取ったデータを JSONObject に変換できなかった際の処理です.
-            throw RepositoriesArrayGetError.convertToDictionaryFailed
-        }
-        guard let items = jsonObject["items"] as? [[String: Any]] else {
-            // 辞書に "items" の value がなかった際の処理です.
-            throw RepositoriesArrayGetError.getRepotioriesArrayFromDictionaryFailed
-        }
-        return items
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        let result = try decoder.decode(Repositories.self, from: data)
+//        guard let jsonObject = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+//            // 受け取ったデータを JSONObject に変換できなかった際の処理です.
+//            throw RepositoriesArrayGetError.convertToDictionaryFailed
+//        }
+//        guard let items = jsonObject["items"] as? [[String: Any]] else {
+//            // 辞書に "items" の value がなかった際の処理です.
+//            throw RepositoriesArrayGetError.getRepotioriesArrayFromDictionaryFailed
+//        }
+        return result
     }
     
     /// 辞書型のリポジトリデータをテーブルビューに表示します.
-    func present(repositories: [[String: Any]]) {
+    func present(repositories: Repositories) {
         self.repositories = repositories
         // データが更新されるため, TableView の表示を更新します.
         DispatchQueue.main.async {
@@ -108,7 +111,7 @@ class RepositorySearchController: UITableViewController, UISearchBarDelegate {
     
     /// TableView の row の数を設定します.
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.repositories.count
+        return self.repositories.items.count
     }
     
     /// TableViewCell を初期化します.
@@ -116,9 +119,9 @@ class RepositorySearchController: UITableViewController, UISearchBarDelegate {
         
         // TableViewCell をカスタマイズします.
         let cell = UITableViewCell()
-        let repository = self.repositories[indexPath.row]
-        cell.textLabel?.text = repository["full_name"] as? String ?? ""
-        cell.detailTextLabel?.text = repository["language"] as? String ?? ""
+        let repository = self.repositories.items[indexPath.row]
+        cell.textLabel?.text = repository.fullName
+        cell.detailTextLabel?.text = repository.language
         cell.tag = indexPath.row
         return cell
         

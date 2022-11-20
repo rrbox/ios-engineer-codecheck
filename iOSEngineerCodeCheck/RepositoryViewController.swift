@@ -32,15 +32,15 @@ class RepositoryViewController: UIViewController {
         
         // リポジトリ検索コントローラから, 選択したリポジトリを取得します.
         guard let index = self.repositorySearch?.index else { return }
-        guard let repository = self.repositorySearch?.repositories[index] else { return }
+        guard let repository = self.repositorySearch?.repositories.items[index] else { return }
         
         // リポジトリの要素を対応するプロパティで表示します.
-        self.titleLabel.text = repository["full_name"] as? String
-        self.languageLabel.text = "Written in \(repository["language"] as? String ?? "")"
-        self.starsLabel.text = "\(repository["stargazers_count"] as? Int ?? 0) stars"
-        self.watchersLabel.text = "\(repository["wachers_count"] as? Int ?? 0) watchers"
-        self.forksLabel.text = "\(repository["forks_count"] as? Int ?? 0) forks"
-        self.issuesLabel.text = "\(repository["open_issues_count"] as? Int ?? 0) open issues"
+        self.titleLabel.text = repository.fullName
+        self.languageLabel.text = "Written in \(repository.language)"
+        self.starsLabel.text = "\(repository.stargazersCount) stars"
+        self.watchersLabel.text = "\(repository.watchersCount) watchers"
+        self.forksLabel.text = "\(repository.forksCount) forks"
+        self.issuesLabel.text = "\(repository.openIssuesCount) open issues"
         
         Task {
             try? await self.present(
@@ -53,17 +53,10 @@ class RepositoryViewController: UIViewController {
     /// リポジトリデータの辞書から, Owner のアバター画像の URL を取得します.
     /// - Parameter repository: JSON から生成したリポジトリデータの辞書です.
     /// - Returns: Owner のアバター画像の URL です.
-    func getURL(from repository: [String: Any]) throws -> URL {
+    func getURL(from repository: Repository) throws -> URL {
         
         // リポジトリからアバター画像を取り出すために, owner key のオブジェクトを取り出します.
-        guard let owner = repository["owner"] as? [String: Any] else {
-            throw RepositoryLoadError.ownerDataLoadFailed
-        }
-        
-        guard let imageURLString = owner["avatar_url"] as? String else {
-            throw RepositoryLoadError.imageURLLoadFailed
-        }
-        guard let result = URL(string: imageURLString) else {
+        guard let result = URL(string: repository.owner.avatarUrl) else {
             throw RepositoryLoadError.imageURLLoadFailed
         }
         return result
