@@ -8,6 +8,11 @@
 
 import UIKit
 
+enum RepositoriesArrayGetError: Error {
+    case convertToDictionaryFailed
+    case getRepotioriesArrayFromDictionaryFailed
+}
+
 /// Repository を検索し, 該当するリポジトリを一覧で表示するコントローラーです.
 class RepositorySearchController: UITableViewController, UISearchBarDelegate {
     
@@ -35,6 +40,19 @@ class RepositorySearchController: UITableViewController, UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         self.task?.cancel()
+    }
+    
+    func getRepositories(from url: URL) async throws -> [[String: Any]] {
+        let (data, _) = try await URLSession.shared.data(for: URLRequest(url: url))
+        guard let jsonObject = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
+            // 受け取ったデータを JSONObject に変換できなかった際の処理です.
+            throw RepositoriesArrayGetError.convertToDictionaryFailed
+        }
+        guard let items = jsonObject["items"] as? [[String: Any]] else {
+            // 辞書に "items" の value がなかった際の処理です.
+            throw RepositoriesArrayGetError.getRepotioriesArrayFromDictionaryFailed
+        }
+        return items
     }
     
     /// ユーザーが文字入力を終え, 検索を開始したときの処理です.
