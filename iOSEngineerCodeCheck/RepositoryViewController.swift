@@ -25,14 +25,14 @@ class RepositoryViewController: UIViewController {
     @IBOutlet weak var forksLabel: UILabel!
     @IBOutlet weak var issuesLabel: UILabel!
     
-    var repositorySearch: RepositorySearchController!
+    var repositorySearch: RepositorySearchController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // リポジトリ検索コントローラから, 選択したリポジトリを取得します.
-        guard let index = self.repositorySearch.index else { return }
-        let repository = self.repositorySearch.repositories[index]
+        guard let index = self.repositorySearch?.index else { return }
+        guard let repository = self.repositorySearch?.repositories[index] else { return }
         
         // リポジトリの要素を対応するプロパティで表示します.
         self.titleLabel.text = repository["full_name"] as? String

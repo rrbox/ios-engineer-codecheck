@@ -41,7 +41,7 @@ class RepositorySearchController: UITableViewController, UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
         // サーチバーに入力したテキストをプロパティにセットします.
-        self.word = searchBar.text!
+        self.word = searchBar.text
         
         guard let word = self.word else { return }
         
