@@ -54,14 +54,6 @@ class RepositorySearchController: UITableViewController, UISearchBarDelegate {
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         let result = try decoder.decode(Repositories.self, from: data)
-//        guard let jsonObject = try JSONSerialization.jsonObject(with: data) as? [String: Any] else {
-//            // 受け取ったデータを JSONObject に変換できなかった際の処理です.
-//            throw RepositoriesArrayGetError.convertToDictionaryFailed
-//        }
-//        guard let items = jsonObject["items"] as? [[String: Any]] else {
-//            // 辞書に "items" の value がなかった際の処理です.
-//            throw RepositoriesArrayGetError.getRepotioriesArrayFromDictionaryFailed
-//        }
         return result
     }
     
