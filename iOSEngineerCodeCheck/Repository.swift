@@ -8,16 +8,16 @@
 import Foundation
 
 struct Owner: Codable {
-    var avatarUrl: String = ""
+    var avatarUrl: String
 }
 
 struct Repository: Codable {
-    var fullName: String = ""
+    var fullName: String
     var language: String?
-    var stargazersCount: Int = 0
-    var watchersCount: Int = 0
-    var forksCount: Int = 0
-    var openIssuesCount: Int = 0
+    var stargazersCount: Int
+    var watchersCount: Int
+    var forksCount: Int
+    var openIssuesCount: Int
     var owner: Owner
 }
 
