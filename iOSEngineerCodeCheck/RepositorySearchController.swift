@@ -42,7 +42,7 @@ class RepositorySearchController: UITableViewController, UISearchBarDelegate {
         self.task?.cancel()
     }
     
-    func getQueryURL(query: String) -> URL? {
+    func getSearchQueryURL(query: String) -> URL? {
         URL(string: "https://api.github.com/search/repositories?q=\(query)")
     }
     
