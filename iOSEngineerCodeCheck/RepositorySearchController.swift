@@ -19,6 +19,10 @@ class RepositorySearchController: UITableViewController, UISearchBarDelegate {
     
     @IBOutlet weak var searchBar: UISearchBar!
     
+    weak var repositoryTableView: RepositoryTableView? {
+        self.tableView as? RepositoryTableView
+    }
+    
     var repositories = Repositories()
     var task: Task<(), Never>?
     var index: Int?
@@ -28,6 +32,7 @@ class RepositorySearchController: UITableViewController, UISearchBarDelegate {
         // Do any additional setup after loading the view.
         self.searchBar.text = "GitHubのリポジトリを検索できるよー"
         self.searchBar.delegate = self
+        self.repositoryTableView?.dataSource = self.repositoryTableView
     }
     
     /// ユーザーが検索のために文字入力を開始したときの処理です.
@@ -58,11 +63,8 @@ class RepositorySearchController: UITableViewController, UISearchBarDelegate {
     
     /// 辞書型のリポジトリデータをテーブルビューに表示します.
     func present(repositories: Repositories) {
-        self.repositories = repositories
         // データが更新されるため, TableView の表示を更新します.
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
+        self.repositoryTableView?.present(repositories: repositories.items)
     }
     
     /// ユーザーが文字入力を終え, 検索を開始したときの処理です.
@@ -80,6 +82,7 @@ class RepositorySearchController: UITableViewController, UISearchBarDelegate {
             do {
                 let repositories = try await self.getRepositories(from: url)
                 self.present(repositories: repositories)
+                self.repositories = repositories
             } catch {
                 print(error)
             }
@@ -95,25 +98,6 @@ class RepositorySearchController: UITableViewController, UISearchBarDelegate {
             guard let index = self.index else { return }
             destination.selectedRepository = self.repositories.items[index]
         }
-        
-    }
-    
-    
-    /// TableView の row の数を設定します.
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.repositories.items.count
-    }
-    
-    /// TableViewCell を初期化します.
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        // TableViewCell をカスタマイズします.
-        let cell = UITableViewCell()
-        let repository = self.repositories.items[indexPath.row]
-        cell.textLabel?.text = repository.fullName
-        cell.detailTextLabel?.text = repository.language
-        cell.tag = indexPath.row
-        return cell
         
     }
     

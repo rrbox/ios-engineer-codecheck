@@ -12,7 +12,7 @@
         <scene sceneID="0Yw-Vc-k2Q">
             <objects>
                 <tableViewController id="MOh-CZ-3ki" customClass="RepositorySearchController" customModule="iOSEngineerCodeCheck" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Fpt-Ev-QNW">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Fpt-Ev-QNW" customClass="RepositoryTableView" customModule="iOSEngineerCodeCheck" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -66,7 +66,7 @@
         <scene sceneID="JOC-74-7VT">
             <objects>
                 <viewController id="AHY-RL-7mG" customClass="RepositoryViewController" customModule="iOSEngineerCodeCheck" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="4gp-25-lRZ">
+                    <view key="view" contentMode="scaleToFill" id="4gp-25-lRZ" customClass="RepositoryView" customModule="iOSEngineerCodeCheck" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -140,11 +140,11 @@
                                 <exclude reference="IgU-EN-fM3"/>
                                 <exclude reference="EMR-2C-CyU"/>
                                 <exclude reference="oID-DR-Dut"/>
-                                <exclude reference="G2L-KM-330"/>
-                                <exclude reference="Ght-Nb-HEu"/>
                                 <exclude reference="dPu-j0-Myp"/>
                                 <exclude reference="i0J-Kl-ewv"/>
                                 <exclude reference="kVV-YK-ePr"/>
+                                <exclude reference="G2L-KM-330"/>
+                                <exclude reference="Ght-Nb-HEu"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -152,11 +152,11 @@
                                 <include reference="IgU-EN-fM3"/>
                                 <include reference="EMR-2C-CyU"/>
                                 <include reference="oID-DR-Dut"/>
-                                <include reference="G2L-KM-330"/>
-                                <include reference="Ght-Nb-HEu"/>
                                 <include reference="dPu-j0-Myp"/>
                                 <include reference="i0J-Kl-ewv"/>
                                 <include reference="kVV-YK-ePr"/>
+                                <include reference="G2L-KM-330"/>
+                                <include reference="Ght-Nb-HEu"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=regular">
@@ -164,23 +164,26 @@
                                 <include reference="IgU-EN-fM3"/>
                                 <include reference="EMR-2C-CyU"/>
                                 <include reference="oID-DR-Dut"/>
-                                <include reference="G2L-KM-330"/>
-                                <include reference="Ght-Nb-HEu"/>
                                 <include reference="dPu-j0-Myp"/>
                                 <include reference="i0J-Kl-ewv"/>
                                 <include reference="kVV-YK-ePr"/>
+                                <include reference="G2L-KM-330"/>
+                                <include reference="Ght-Nb-HEu"/>
                             </mask>
                         </variation>
+                        <connections>
+                            <outlet property="forksLabel" destination="ZMv-4f-X2V" id="eI8-h2-GoK"/>
+                            <outlet property="imageView" destination="Iim-eb-8Ad" id="c5I-VV-qfS"/>
+                            <outlet property="issuesLabel" destination="dzg-K8-h2L" id="i5S-en-FVu"/>
+                            <outlet property="languageLabel" destination="s3M-QO-Kom" id="hgR-gb-gGM"/>
+                            <outlet property="starsLabel" destination="0WZ-UA-R8O" id="LVF-Ss-z8F"/>
+                            <outlet property="titleLabel" destination="4q1-pG-WSB" id="7jI-aG-4uY"/>
+                            <outlet property="watchersLabel" destination="lQC-lo-IqN" id="hKG-7u-QrH"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="J6o-vL-S1z"/>
                     <connections>
-                        <outlet property="forksLabel" destination="ZMv-4f-X2V" id="i84-sH-c5t"/>
-                        <outlet property="imageView" destination="Iim-eb-8Ad" id="dmH-tP-ZuI"/>
-                        <outlet property="issuesLabel" destination="dzg-K8-h2L" id="L0v-sy-cD4"/>
-                        <outlet property="languageLabel" destination="s3M-QO-Kom" id="x3L-gZ-aZZ"/>
-                        <outlet property="starsLabel" destination="0WZ-UA-R8O" id="gYb-gI-iMf"/>
-                        <outlet property="titleLabel" destination="4q1-pG-WSB" id="UQ0-5D-rWe"/>
-                        <outlet property="watchersLabel" destination="lQC-lo-IqN" id="Drg-Jv-iUh"/>
+                        <outlet property="repositoryView" destination="4gp-25-lRZ" id="f8T-Hb-JVI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rj0-Ld-RTn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
