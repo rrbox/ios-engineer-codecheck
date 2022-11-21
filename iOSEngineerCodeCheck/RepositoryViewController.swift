@@ -22,7 +22,11 @@ class RepositoryViewController: UIViewController {
 //        guard let index = self.selectedRepository?.index else { return }
         guard let repository = self.selectedRepository else { return }
         
-        self.repositoryView.present(repository: repository)
+        do {
+            self.repositoryView.present(repository: try RepositoryDetailOutput(from: repository))
+        } catch {
+            print(error)
+        }
         
     }
     

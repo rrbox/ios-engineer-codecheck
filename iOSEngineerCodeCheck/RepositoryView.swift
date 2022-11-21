@@ -50,18 +50,18 @@ class RepositoryView: UIView {
     }
     
     /// リポジトリデータを表示するメソッドです.
-    func present(repository: Repository) {
+    func present(repository: RepositoryDetailOutput) {
         // リポジトリの要素を対応するプロパティで表示します.
         self.titleLabel.text = repository.fullName
-        self.languageLabel.text = "Written in \(repository.language ?? "other")"
-        self.starsLabel.text = "\(repository.stargazersCount) stars"
-        self.watchersLabel.text = "\(repository.watchersCount) watchers"
-        self.forksLabel.text = "\(repository.forksCount) forks"
-        self.issuesLabel.text = "\(repository.openIssuesCount) open issues"
+        self.languageLabel.text = repository.language
+        self.starsLabel.text = repository.stargazersCount
+        self.watchersLabel.text = repository.watchersCount
+        self.forksLabel.text = repository.forksCount
+        self.issuesLabel.text = repository.openIssuesCount
         
         Task {
             try? await self.present(
-                image: self.getImage(url: self.getURL(from: repository)),
+                image: self.getImage(url: repository.ownerImageURL),
                 defaultImage: UIImage(systemName: "person.circle"))
         }
     }
