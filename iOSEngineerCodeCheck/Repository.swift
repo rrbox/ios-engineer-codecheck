@@ -24,3 +24,15 @@ struct Repository: Codable {
 struct Repositories: Codable {
     var items: [Repository] = []
 }
+
+extension Repositories {
+    
+    /// URL で通信し, リポジトリの値を取得します.
+    static func load(from url: URL) async throws -> Repositories {
+        let (data, _) = try await URLSession.shared.data(for: URLRequest(url: url))
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        let result = try decoder.decode(Repositories.self, from: data)
+        return result
+    }
+}
