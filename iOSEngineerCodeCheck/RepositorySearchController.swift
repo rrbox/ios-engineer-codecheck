@@ -131,23 +131,6 @@ class RepositorySearchController: UITableViewController, UISearchBarDelegate {
         
     }
     
-    
-//    /// TableView の row の数を設定します.
-//    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return self.repositories.items.count
-//    }
-//
-//    /// TableViewCell を初期化します.
-//    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//
-//        // TableViewCell をカスタマイズします.
-//        let cell = RepositoryCell()
-//        let repository = self.repositories.items[indexPath.row]
-//        cell.present(repository: repository, cellForRowAt: indexPath)
-//        return cell
-//
-//    }
-    
     /// Table のアイテムを選択したときの処理です.
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
