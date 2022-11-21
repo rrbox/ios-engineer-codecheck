@@ -14,6 +14,14 @@ enum RepositoriesArrayGetError: Error {
     case taskFailed
 }
 
+class RepositoryCell: UITableViewCell {
+    func present(repository: Repository, cellForRowAt indexPath: IndexPath) {
+        self.textLabel?.text = repository.fullName
+        self.detailTextLabel?.text = repository.language
+        self.tag = indexPath.row
+    }
+}
+
 /// Repository を検索し, 該当するリポジトリを一覧で表示するコントローラーです.
 class RepositorySearchController: UITableViewController, UISearchBarDelegate {
     
@@ -108,11 +116,9 @@ class RepositorySearchController: UITableViewController, UISearchBarDelegate {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         // TableViewCell をカスタマイズします.
-        let cell = UITableViewCell()
+        let cell = RepositoryCell()
         let repository = self.repositories.items[indexPath.row]
-        cell.textLabel?.text = repository.fullName
-        cell.detailTextLabel?.text = repository.language
-        cell.tag = indexPath.row
+        cell.present(repository: repository, cellForRowAt: indexPath)
         return cell
         
     }
