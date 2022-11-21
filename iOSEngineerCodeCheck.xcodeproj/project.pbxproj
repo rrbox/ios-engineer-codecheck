@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		A43326F0292A17FB00FDE19E /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43326EF292A17FB00FDE19E /* Repository.swift */; };
 		A4598D52292B21BC00D9474A /* RepositoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4598D51292B21BC00D9474A /* RepositoryView.swift */; };
+		A4598D56292BB19800D9474A /* RepositoryTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4598D55292BB19800D9474A /* RepositoryTableView.swift */; };
 		BF0A658D244F2A3B00280FA6 /* RepositoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0A658C244F2A3B00280FA6 /* RepositoryViewController.swift */; };
 		BFD945DF244DC5E80012785A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD945DE244DC5E80012785A /* AppDelegate.swift */; };
 		BFD945E1244DC5E80012785A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD945E0244DC5E80012785A /* SceneDelegate.swift */; };
@@ -40,6 +41,7 @@
 /* Begin PBXFileReference section */
 		A43326EF292A17FB00FDE19E /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
 		A4598D51292B21BC00D9474A /* RepositoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryView.swift; sourceTree = "<group>"; };
+		A4598D55292BB19800D9474A /* RepositoryTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryTableView.swift; sourceTree = "<group>"; };
 		BF0A658C244F2A3B00280FA6 /* RepositoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryViewController.swift; sourceTree = "<group>"; };
 		BFD945DB244DC5E80012785A /* iOSEngineerCodeCheck.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSEngineerCodeCheck.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFD945DE244DC5E80012785A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -108,6 +110,7 @@
 				BFD945DE244DC5E80012785A /* AppDelegate.swift */,
 				BFD945E0244DC5E80012785A /* SceneDelegate.swift */,
 				BFD945E2244DC5E80012785A /* RepositorySearchController.swift */,
+				A4598D55292BB19800D9474A /* RepositoryTableView.swift */,
 				BF0A658C244F2A3B00280FA6 /* RepositoryViewController.swift */,
 				A4598D51292B21BC00D9474A /* RepositoryView.swift */,
 				A43326EF292A17FB00FDE19E /* Repository.swift */,
@@ -274,6 +277,7 @@
 				A43326F0292A17FB00FDE19E /* Repository.swift in Sources */,
 				BFD945DF244DC5E80012785A /* AppDelegate.swift in Sources */,
 				BFD945E1244DC5E80012785A /* SceneDelegate.swift in Sources */,
+				A4598D56292BB19800D9474A /* RepositoryTableView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
