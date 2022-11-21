@@ -27,7 +27,7 @@ class RepositoryTableView: UITableView, UITableViewDataSource {
     
     func present(repositories: [Repository]) {
         self.repositories = repositories
-        DispatchQueue.main.sync {
+        DispatchQueue.main.async {
             self.reloadData()
         }
     }
