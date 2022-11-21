@@ -45,7 +45,7 @@ class RepositoryView: UIView {
     
     /// ViewController に画像を表示します.
     /// - Parameter image: UIImage
-    func present(image: UIImage?, defaultImage: UIImage? = UIImage(systemName: "exclamationmark.square.fill")) {
+    private func present(image: UIImage?, defaultImage: UIImage? = UIImage(systemName: "exclamationmark.square.fill")) {
         self.imageView.image = image ?? defaultImage
     }
     
