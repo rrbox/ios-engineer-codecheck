@@ -14,13 +14,6 @@ enum RepositoriesArrayGetError: Error {
     case taskFailed
 }
 
-enum GitHubAPI {
-    /// リポジトリを検索するクエリを生成するメソッドです.
-    static func getSearchRepositoriesURL(query: String) -> URL? {
-        URL(string: "https://api.github.com/search/repositories?q=\(query)")
-    }
-}
-
 /// Repository を検索し, 該当するリポジトリを一覧で表示するコントローラーです.
 class RepositorySearchController: UITableViewController, UISearchBarDelegate {
     
