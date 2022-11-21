@@ -27,7 +27,9 @@ class RepositoryTableView: UITableView, UITableViewDataSource {
     
     func present(repositories: [Repository]) {
         self.repositories = repositories
-        self.reloadData()
+        DispatchQueue.main.sync {
+            self.reloadData()
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -88,9 +90,7 @@ class RepositorySearchController: UITableViewController, UISearchBarDelegate {
     /// 辞書型のリポジトリデータをテーブルビューに表示します.
     func present(repositories: Repositories) {
         // データが更新されるため, TableView の表示を更新します.
-        DispatchQueue.main.async {
-            (self.tableView as? RepositoryTableView)?.present(repositories: repositories.items)
-        }
+        (self.tableView as? RepositoryTableView)?.present(repositories: repositories.items)
     }
     
     /// ユーザーが文字入力を終え, 検索を開始したときの処理です.
