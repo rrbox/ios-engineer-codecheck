@@ -14,6 +14,13 @@ enum RepositoriesArrayGetError: Error {
     case taskFailed
 }
 
+enum GitHubAPI {
+    /// リポジトリを検索するクエリを生成するメソッドです.
+    static func getSearchRepositoriesURL(query: String) -> URL? {
+        URL(string: "https://api.github.com/search/repositories?q=\(query)")
+    }
+}
+
 /// Repository を検索し, 該当するリポジトリを一覧で表示するコントローラーです.
 class RepositorySearchController: UITableViewController, UISearchBarDelegate {
     
@@ -47,11 +54,6 @@ class RepositorySearchController: UITableViewController, UISearchBarDelegate {
         self.task?.cancel()
     }
     
-    /// リポジトリを検索するクエリを生成するメソッドです.
-    func getSearchQueryURL(query: String) -> URL? {
-        URL(string: "https://api.github.com/search/repositories?q=\(query)")
-    }
-    
     /// 辞書型のリポジトリデータをテーブルビューに表示します.
     func present(repositories: Repositories) {
         // データが更新されるため, TableView の表示を更新します.
@@ -68,7 +70,8 @@ class RepositorySearchController: UITableViewController, UISearchBarDelegate {
         guard word.count != 0 else { return }
         
         // URL を作成し, リポジトリの一覧の JSON を GET します.
-        guard let url = self.getSearchQueryURL(query: word) else { return }
+        guard let url = GitHubAPI.getSearchRepositoriesURL(query: word) else { return }
+        
         self.task = Task {
             do {
                 let repositories = try await Repositories.load(from: url)
