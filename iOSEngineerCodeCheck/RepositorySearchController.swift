@@ -49,6 +49,10 @@ class RepositorySearchController: UITableViewController, UISearchBarDelegate {
     
     @IBOutlet weak var searchBar: UISearchBar!
     
+    weak var repositoryTableView: RepositoryTableView? {
+        self.tableView as? RepositoryTableView
+    }
+    
     var repositories = Repositories()
     var task: Task<(), Never>?
     var index: Int?
@@ -58,7 +62,7 @@ class RepositorySearchController: UITableViewController, UISearchBarDelegate {
         // Do any additional setup after loading the view.
         self.searchBar.text = "GitHubのリポジトリを検索できるよー"
         self.searchBar.delegate = self
-        (self.tableView as? RepositoryTableView)?.dataSource = (self.tableView as? RepositoryTableView)
+        self.repositoryTableView?.dataSource = self.repositoryTableView
     }
     
     /// ユーザーが検索のために文字入力を開始したときの処理です.
@@ -90,7 +94,7 @@ class RepositorySearchController: UITableViewController, UISearchBarDelegate {
     /// 辞書型のリポジトリデータをテーブルビューに表示します.
     func present(repositories: Repositories) {
         // データが更新されるため, TableView の表示を更新します.
-        (self.tableView as? RepositoryTableView)?.present(repositories: repositories.items)
+        self.repositoryTableView?.present(repositories: repositories.items)
     }
     
     /// ユーザーが文字入力を終え, 検索を開始したときの処理です.
