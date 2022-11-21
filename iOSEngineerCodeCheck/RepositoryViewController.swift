@@ -11,7 +11,6 @@ import UIKit
 /// 特定のリポジトリについての情報を表示する ViewController です.
 class RepositoryViewController: UIViewController {
     
-    
     @IBOutlet weak var repositoryView: RepositoryView!
     
     var selectedRepository: Repository?
