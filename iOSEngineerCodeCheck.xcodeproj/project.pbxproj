@@ -86,6 +86,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A4598D59292BDA7500D9474A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A4598D57292BC8F200D9474A /* NetWork.swift */,
+				A43326EF292A17FB00FDE19E /* Repository.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		A4598D5A292BDA9D00D9474A /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				BF0A658C244F2A3B00280FA6 /* RepositoryViewController.swift */,
+				BFD945E2244DC5E80012785A /* RepositorySearchController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		A4598D5B292BDAB300D9474A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A4598D55292BB19800D9474A /* RepositoryTableView.swift */,
+				A4598D51292B21BC00D9474A /* RepositoryView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		BFD945D2244DC5E80012785A = {
 			isa = PBXGroup;
 			children = (
@@ -109,14 +136,11 @@
 		BFD945DD244DC5E80012785A /* iOSEngineerCodeCheck */ = {
 			isa = PBXGroup;
 			children = (
+				A4598D5B292BDAB300D9474A /* Views */,
+				A4598D5A292BDA9D00D9474A /* Controllers */,
+				A4598D59292BDA7500D9474A /* Models */,
 				BFD945DE244DC5E80012785A /* AppDelegate.swift */,
 				BFD945E0244DC5E80012785A /* SceneDelegate.swift */,
-				BFD945E2244DC5E80012785A /* RepositorySearchController.swift */,
-				A4598D55292BB19800D9474A /* RepositoryTableView.swift */,
-				A4598D57292BC8F200D9474A /* NetWork.swift */,
-				BF0A658C244F2A3B00280FA6 /* RepositoryViewController.swift */,
-				A4598D51292B21BC00D9474A /* RepositoryView.swift */,
-				A43326EF292A17FB00FDE19E /* Repository.swift */,
 				BFD945E4244DC5E80012785A /* Main.storyboard */,
 				BFD945E7244DC5EB0012785A /* Assets.xcassets */,
 				BFD945E9244DC5EB0012785A /* LaunchScreen.storyboard */,
