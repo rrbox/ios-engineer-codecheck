@@ -22,6 +22,26 @@ class RepositoryCell: UITableViewCell {
     }
 }
 
+class RepositoryTableView: UITableView, UITableViewDataSource {
+    private var repositories: [Repository] = []
+    
+    func present(repositories: [Repository]) {
+        self.repositories = repositories
+        self.reloadData()
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.repositories.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = RepositoryCell()
+        let repository = self.repositories[indexPath.row]
+        cell.present(repository: repository, cellForRowAt: indexPath)
+        return cell
+    }
+}
+
 /// Repository を検索し, 該当するリポジトリを一覧で表示するコントローラーです.
 class RepositorySearchController: UITableViewController, UISearchBarDelegate {
     
@@ -36,6 +56,7 @@ class RepositorySearchController: UITableViewController, UISearchBarDelegate {
         // Do any additional setup after loading the view.
         self.searchBar.text = "GitHubのリポジトリを検索できるよー"
         self.searchBar.delegate = self
+        (self.tableView as? RepositoryTableView)?.dataSource = (self.tableView as? RepositoryTableView)
     }
     
     /// ユーザーが検索のために文字入力を開始したときの処理です.
@@ -66,10 +87,9 @@ class RepositorySearchController: UITableViewController, UISearchBarDelegate {
     
     /// 辞書型のリポジトリデータをテーブルビューに表示します.
     func present(repositories: Repositories) {
-        self.repositories = repositories
         // データが更新されるため, TableView の表示を更新します.
         DispatchQueue.main.async {
-            self.tableView.reloadData()
+            (self.tableView as? RepositoryTableView)?.present(repositories: repositories.items)
         }
     }
     
@@ -88,6 +108,7 @@ class RepositorySearchController: UITableViewController, UISearchBarDelegate {
             do {
                 let repositories = try await self.getRepositories(from: url)
                 self.present(repositories: repositories)
+                self.repositories = repositories
             } catch {
                 print(error)
             }
@@ -107,21 +128,21 @@ class RepositorySearchController: UITableViewController, UISearchBarDelegate {
     }
     
     
-    /// TableView の row の数を設定します.
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.repositories.items.count
-    }
-    
-    /// TableViewCell を初期化します.
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        // TableViewCell をカスタマイズします.
-        let cell = RepositoryCell()
-        let repository = self.repositories.items[indexPath.row]
-        cell.present(repository: repository, cellForRowAt: indexPath)
-        return cell
-        
-    }
+//    /// TableView の row の数を設定します.
+//    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return self.repositories.items.count
+//    }
+//
+//    /// TableViewCell を初期化します.
+//    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//
+//        // TableViewCell をカスタマイズします.
+//        let cell = RepositoryCell()
+//        let repository = self.repositories.items[indexPath.row]
+//        cell.present(repository: repository, cellForRowAt: indexPath)
+//        return cell
+//
+//    }
     
     /// Table のアイテムを選択したときの処理です.
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
