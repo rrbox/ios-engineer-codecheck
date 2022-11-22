@@ -61,7 +61,7 @@ class RepositoryView: UIView {
         
         Task {
             try? await self.present(
-                image: self.getImage(url: repository.ownerImageURL),
+                image: repository.ownerImageURL.downloaded(),
                 defaultImage: UIImage(systemName: "person.circle"))
         }
     }

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct Owner: Codable {
     var avatarUrl: String
@@ -37,6 +38,12 @@ extension Repositories {
     }
 }
 
+extension UIImage: Downloadable {
+    static func convert(from data: Data) throws -> Self? {
+        return Self(data: data)
+    }
+}
+
 struct RepositoryDetailOutput {
     var fullName: String
     var language: String
@@ -44,7 +51,7 @@ struct RepositoryDetailOutput {
     var watchersCount: String
     var forksCount: String
     var openIssuesCount: String
-    var ownerImageURL: URL
+    var ownerImageURL: ObjectDownload<UIImage>
 }
 
 extension RepositoryDetailOutput {
@@ -58,6 +65,6 @@ extension RepositoryDetailOutput {
         guard let url = URL(string: repository.owner.avatarUrl) else {
             throw RepositoryLoadError.imageURLLoadFailed
         }
-        self.ownerImageURL = url
+        self.ownerImageURL = ObjectDownload(url: url)
     }
 }
