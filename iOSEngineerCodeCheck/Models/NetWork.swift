@@ -15,7 +15,7 @@ enum GitHubAPI {
 }
 
 protocol Downloadable {
-    static func convert(from data: Data) throws -> Self?
+    static func convert(from data: Data) throws -> Self
 }
 
 struct ObjectDownload<T: Downloadable> {
@@ -25,7 +25,7 @@ struct ObjectDownload<T: Downloadable> {
         self.url = url
     }
     
-    func downloaded() async throws -> T? {
+    func downloaded() async throws -> T {
         let (data, _) = try await URLSession.shared.data(for: URLRequest(url: url))
         return try T.convert(from: data)
     }
