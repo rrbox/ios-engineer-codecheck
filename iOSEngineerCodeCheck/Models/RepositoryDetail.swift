@@ -7,7 +7,7 @@
 
 import UIKit
 
-extension Optional<UIImage>: Downloadable {
+extension Optional: Downloadable where Wrapped: UIImage {
     static func convert(from data: Data) throws -> Optional<Wrapped> {
         return Wrapped(data: data)
     }
