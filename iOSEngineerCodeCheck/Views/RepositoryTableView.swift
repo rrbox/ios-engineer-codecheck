@@ -9,9 +9,11 @@ import UIKit
 
 class RepositoryCell: UITableViewCell {
     func present(repository: Repository, cellForRowAt indexPath: IndexPath) {
-        self.textLabel?.text = repository.fullName
-        self.detailTextLabel?.text = repository.language
         self.tag = indexPath.row
+        var content = UIListContentConfiguration.valueCell()
+        content.text = repository.fullName
+        content.secondaryText = repository.language
+        self.contentConfiguration = content
     }
 }
 
