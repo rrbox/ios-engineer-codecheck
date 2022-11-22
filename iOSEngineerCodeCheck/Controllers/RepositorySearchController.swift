@@ -67,7 +67,7 @@ class RepositorySearchController: UITableViewController, UISearchBarDelegate {
         
         self.task = Task {
             do {
-                let repositories = try await Repositories.load(from: url)
+                let repositories = try await ObjectDownload<Repositories>(url: url).downloaded()
                 self.present(repositories: repositories)
                 self.repositories = repositories
             } catch {
