@@ -12,7 +12,7 @@ enum RepositorySearchError: Error {
     case percentEncodingFailed
     case emptyWord
     case urlCreationFailed
-    case repositoriesArrayEnptyError
+    case repositoriesArrayEmptyError
 }
 
 /// Repository を検索し, 該当するリポジトリを一覧で表示するコントローラーです.
@@ -82,7 +82,7 @@ class RepositorySearchController: UITableViewController, UISearchBarDelegate {
             }
             self.present(alert, animated: true)
             
-            throw RepositorySearchError.repositoriesArrayEnptyError
+            throw RepositorySearchError.repositoriesArrayEmptyError
         }
         
         return repositories
