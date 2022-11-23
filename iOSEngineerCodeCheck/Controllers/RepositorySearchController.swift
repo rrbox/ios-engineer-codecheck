@@ -51,6 +51,17 @@ class RepositorySearchController: UITableViewController, UISearchBarDelegate {
     func present(repositories: Repositories) {
         // データが更新されるため, TableView の表示を更新します.
         self.repositoryTableView?.present(repositories: repositories.items)
+        
+        if repositories.items.isEmpty {
+            let alert = UIAlertController(
+                title: "検索結果",
+                message: "0件",
+                preferredStyle: .alert)
+            alert.addAction(UIAlertAction(
+                title: "OK",
+                style: .default))
+            self.present(alert, animated: true)
+        }
     }
     
     /// ユーザーが文字入力を終え, 検索を開始したときの処理です.
