@@ -37,3 +37,18 @@ struct ButtonLessErrorAlert: ErrorAlertCreate {
         return alert
     }
 }
+
+protocol PresentableError: Error {
+    func show(in parent: UIViewController)
+}
+
+struct ErrorAlert<E: PresentableError> {
+    var error: E
+    func show(in parent: UIViewController) {
+        self.error.show(in: parent)
+    }
+    
+    init(error: E) {
+        self.error = error
+    }
+}
