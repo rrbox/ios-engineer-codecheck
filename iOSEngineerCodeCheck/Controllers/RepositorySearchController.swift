@@ -64,11 +64,9 @@ class RepositorySearchController: UITableViewController, UISearchBarDelegate {
         }
     }
     
-    /// ユーザーが文字入力を終え, 検索を開始したときの処理です.
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        
-        // サーチバーに入力したテキストをプロパティにセットします.
-        guard let word = searchBar.text?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return }
+    func search(word: String?) async throws {
+        // 検索ワードにパーセントエンコーディングをかけます.
+        guard let word = word?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return }
         
         // 入力がなかった場合はリポジトリデータを取得しません.
         guard word.count != 0 else { return }
@@ -76,11 +74,16 @@ class RepositorySearchController: UITableViewController, UISearchBarDelegate {
         // URL を作成し, リポジトリの一覧の JSON を GET します.
         guard let url = GitHubAPI.getSearchRepositoriesURL(query: word) else { return }
         
+        let repositories = try await ObjectDownload<Repositories>(url: url).downloaded()
+        self.present(repositories: repositories)
+        self.repositories = repositories
+    }
+    
+    /// ユーザーが文字入力を終え, 検索を開始したときの処理です.
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         self.task = Task {
             do {
-                let repositories = try await ObjectDownload<Repositories>(url: url).downloaded()
-                self.present(repositories: repositories)
-                self.repositories = repositories
+                try await self.search(word: self.searchBar.text)
             } catch {
                 print(error)
             }
