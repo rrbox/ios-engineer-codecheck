@@ -56,13 +56,19 @@ class RepositorySearchController: UITableViewController, UISearchBarDelegate {
     
     func search(word: String?) async throws {
         // 検索ワードにパーセントエンコーディングをかけます.
-        guard let word = word?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return }
+        guard let word = word?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
+            throw RepositorySearchError.percentEncodingFailed
+        }
         
         // 入力がなかった場合はリポジトリデータを取得しません.
-        guard word.count != 0 else { return }
+        guard word.count != 0 else {
+            throw RepositorySearchError.emptyWord
+        }
         
         // URL を作成し, リポジトリの一覧の JSON を GET します.
-        guard let url = GitHubAPI.getSearchRepositoriesURL(query: word) else { return }
+        guard let url = GitHubAPI.getSearchRepositoriesURL(query: word) else {
+            throw RepositorySearchError.urlCreationFailed
+        }
         
         let repositories = try await ObjectDownload<Repositories>(url: url).downloaded()
         
@@ -75,7 +81,8 @@ class RepositorySearchController: UITableViewController, UISearchBarDelegate {
                 alert.dismiss(animated: true)
             }
             self.present(alert, animated: true)
-            return
+            
+            throw RepositorySearchError.repositoriesArrayEnptyError
         }
         
         self.present(repositories: repositories)
