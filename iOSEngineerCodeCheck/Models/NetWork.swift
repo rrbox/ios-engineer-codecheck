@@ -25,8 +25,8 @@ struct ObjectDownload<T: Downloadable> {
         self.url = url
     }
     
-    func downloaded() async throws -> T {
-        let (data, _) = try await URLSession.shared.data(for: URLRequest(url: url))
+    func downloaded(_ session: URLSession = .shared) async throws -> T {
+        let (data, _) = try await session.data(for: URLRequest(url: url))
         return try T.convert(from: data)
     }
 }
