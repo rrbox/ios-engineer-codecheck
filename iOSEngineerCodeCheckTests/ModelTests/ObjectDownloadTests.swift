@@ -30,5 +30,25 @@ final class ObjectDownloadTests: XCTestCase {
         let object = ObjectDownload<String>(url: url)
         
     }
+}
 
+final class DownloadableTest: XCTestCase {
+    
+    var data: Data?
+    
+    override func setUp() {
+        self.data = "test".data(using: .utf8)
+    }
+    
+    func testCreateObject() throws {
+        guard let data = self.data else {
+            XCTFail("Data の生成に失敗しています.")
+            return
+        }
+        
+        let testString = try String.convert(from: data)
+        XCTAssertNotNil(testString)
+        XCTAssertEqual(testString!, "test")
+    }
+    
 }
