@@ -14,8 +14,14 @@ enum GitHubAPI {
     }
 }
 
-protocol Downloadable {
+protocol Downloadable {}
+
+protocol DefaultDownloadable: Downloadable {
     static func convert(from data: Data) throws -> Self
+}
+
+protocol OptionalDonwloadable: Downloadable {
+    static func convert(from data: Data) throws -> Self?
 }
 
 struct ObjectDownload<T: Downloadable> {
@@ -25,7 +31,17 @@ struct ObjectDownload<T: Downloadable> {
         self.url = url
     }
     
+}
+
+extension ObjectDownload where T: DefaultDownloadable {
     func downloaded(_ session: URLSession = .shared) async throws -> T {
+        let (data, _) = try await session.data(for: URLRequest(url: url))
+        return try T.convert(from: data)
+    }
+}
+
+extension ObjectDownload where T: OptionalDonwloadable {
+    func downloaded(_ session: URLSession = .shared) async throws -> T? {
         let (data, _) = try await session.data(for: URLRequest(url: url))
         return try T.convert(from: data)
     }
