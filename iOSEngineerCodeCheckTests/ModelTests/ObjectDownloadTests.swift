@@ -6,8 +6,9 @@
 //
 
 import XCTest
+@testable import iOSEngineerCodeCheck
 
-final class ObjectDownload: XCTestCase {
+final class ObjectDownloadTests: XCTestCase {
     
     var data: String?
     
@@ -16,7 +17,7 @@ final class ObjectDownload: XCTestCase {
     }
     
     func testCreateObject() {
-        let object = ObjectDownload()
+//        let object = ObjectDownload<String>(url: ))
     }
 
 }
