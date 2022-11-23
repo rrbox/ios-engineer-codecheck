@@ -8,6 +8,12 @@
 import XCTest
 @testable import iOSEngineerCodeCheck
 
+extension String: OptionalDonwloadable {
+    public static func convert(from data: Data) throws -> String? {
+        String(data: data, encoding: .utf8)
+    }
+}
+
 final class ObjectDownloadTests: XCTestCase {
     
     var data: String?
@@ -16,8 +22,13 @@ final class ObjectDownloadTests: XCTestCase {
         self.data = "test"
     }
     
-    func testCreateObject() {
-//        let object = ObjectDownload<String>(url: ))
+    func testCreateObject() throws {
+        guard let url = URL(string: "https://example") else {
+            XCTFail()
+            return
+        }
+        let object = ObjectDownload<String>(url: url)
+        
     }
 
 }
