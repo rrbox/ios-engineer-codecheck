@@ -8,15 +8,8 @@
 
 import UIKit
 
-enum RepositorySearchError: Error {
-    case percentEncodingFailed
-    case emptyWord
-    case urlCreationFailed
-    case repositoriesArrayEmptyError
-}
-
 /// Repository を検索し, 該当するリポジトリを一覧で表示するコントローラーです.
-class RepositorySearchController: UITableViewController, UISearchBarDelegate {
+class RepositorySearchController: UITableViewController, UISearchBarDelegate, SearchProtocol {
     
     @IBOutlet weak var searchBar: UISearchBar!
     
@@ -54,40 +47,6 @@ class RepositorySearchController: UITableViewController, UISearchBarDelegate {
         self.repositoryTableView?.present(repositories: repositories.items)
     }
     
-    func search(word: String?) async throws -> Repositories {
-        // 検索ワードにパーセントエンコーディングをかけます.
-        guard let word = word?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
-            throw RepositorySearchError.percentEncodingFailed
-        }
-        
-        // 入力がなかった場合はリポジトリデータを取得しません.
-        guard word.count != 0 else {
-            throw RepositorySearchError.emptyWord
-        }
-        
-        // URL を作成し, リポジトリの一覧の JSON を GET します.
-        guard let url = GitHubAPI.getSearchRepositoriesURL(query: word) else {
-            throw RepositorySearchError.urlCreationFailed
-        }
-        
-        let repositories = try await ObjectDownload<Repositories>(url: url).downloaded()
-        
-        guard !repositories.items.isEmpty else {
-            let alert = UIAlertController(
-                title: "検索結果",
-                message: "0件",
-                preferredStyle: .alert)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                alert.dismiss(animated: true)
-            }
-            self.present(alert, animated: true)
-            
-            throw RepositorySearchError.repositoriesArrayEmptyError
-        }
-        
-        return repositories
-    }
-    
     /// ユーザーが文字入力を終え, 検索を開始したときの処理です.
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         self.task = Task {
@@ -95,6 +54,25 @@ class RepositorySearchController: UITableViewController, UISearchBarDelegate {
                 let repositories = try await self.search(word: self.searchBar.text)
                 self.present(repositories: repositories)
                 self.repositories = repositories
+                
+            } catch let error as RepositorySearchError {
+                switch error {
+                case .percentEncodingFailed:
+                    print(error)
+                case .emptyWord:
+                    print(error)
+                case .urlCreationFailed:
+                    print(error)
+                case .repositoriesArrayEmptyError:
+                    let alert = UIAlertController(
+                        title: "検索結果",
+                        message: "0件",
+                        preferredStyle: .alert)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                        alert.dismiss(animated: true)
+                    }
+                    self.present(alert, animated: true)
+                }
             } catch {
                 print(error)
             }
