@@ -11,7 +11,7 @@ final class ObjectDownload: XCTestCase {
     
     var data: String?
     
-    override class func setUp() {
+    override func setUp() {
         self.data = "test"
     }
     
