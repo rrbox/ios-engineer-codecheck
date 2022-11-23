@@ -8,10 +8,11 @@
 
 import UIKit
 
-enum RepositoriesArrayGetError: Error {
-    case convertToDictionaryFailed
-    case getRepotioriesArrayFromDictionaryFailed
-    case taskFailed
+enum RepositorySearchError: Error {
+    case percentEncodingFailed
+    case emptyWord
+    case urlCreationFailed
+    case repositoriesArrayEnptyError
 }
 
 /// Repository を検索し, 該当するリポジトリを一覧で表示するコントローラーです.
