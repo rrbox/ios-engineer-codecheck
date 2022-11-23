@@ -31,7 +31,7 @@ struct ButtonLessErrorAlert: ErrorAlertCreate {
             title: title,
             message: message,
             preferredStyle: .alert)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
             alert.dismiss(animated: true)
         }
         return alert
