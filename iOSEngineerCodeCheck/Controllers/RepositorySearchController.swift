@@ -51,17 +51,6 @@ class RepositorySearchController: UITableViewController, UISearchBarDelegate {
     func present(repositories: Repositories) {
         // データが更新されるため, TableView の表示を更新します.
         self.repositoryTableView?.present(repositories: repositories.items)
-        
-        if repositories.items.isEmpty {
-            let alert = UIAlertController(
-                title: "検索結果",
-                message: "0件",
-                preferredStyle: .alert)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                alert.dismiss(animated: true)
-            }
-            self.present(alert, animated: true)
-        }
     }
     
     func search(word: String?) async throws {
@@ -75,6 +64,19 @@ class RepositorySearchController: UITableViewController, UISearchBarDelegate {
         guard let url = GitHubAPI.getSearchRepositoriesURL(query: word) else { return }
         
         let repositories = try await ObjectDownload<Repositories>(url: url).downloaded()
+        
+        guard !repositories.items.isEmpty else {
+            let alert = UIAlertController(
+                title: "検索結果",
+                message: "0件",
+                preferredStyle: .alert)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                alert.dismiss(animated: true)
+            }
+            self.present(alert, animated: true)
+            return
+        }
+        
         self.present(repositories: repositories)
         self.repositories = repositories
     }
