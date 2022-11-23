@@ -54,7 +54,7 @@ class RepositorySearchController: UITableViewController, UISearchBarDelegate {
         self.repositoryTableView?.present(repositories: repositories.items)
     }
     
-    func search(word: String?) async throws {
+    func search(word: String?) async throws -> Repositories {
         // 検索ワードにパーセントエンコーディングをかけます.
         guard let word = word?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else {
             throw RepositorySearchError.percentEncodingFailed
@@ -85,15 +85,16 @@ class RepositorySearchController: UITableViewController, UISearchBarDelegate {
             throw RepositorySearchError.repositoriesArrayEnptyError
         }
         
-        self.present(repositories: repositories)
-        self.repositories = repositories
+        return repositories
     }
     
     /// ユーザーが文字入力を終え, 検索を開始したときの処理です.
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         self.task = Task {
             do {
-                try await self.search(word: self.searchBar.text)
+                let repositories = try await self.search(word: self.searchBar.text)
+                self.present(repositories: repositories)
+                self.repositories = repositories
             } catch {
                 print(error)
             }
