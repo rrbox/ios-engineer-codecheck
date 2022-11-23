@@ -57,9 +57,9 @@ class RepositorySearchController: UITableViewController, UISearchBarDelegate {
                 title: "検索結果",
                 message: "0件",
                 preferredStyle: .alert)
-            alert.addAction(UIAlertAction(
-                title: "OK",
-                style: .default))
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                alert.dismiss(animated: true)
+            }
             self.present(alert, animated: true)
         }
     }
