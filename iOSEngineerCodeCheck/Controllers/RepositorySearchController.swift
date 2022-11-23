@@ -56,23 +56,7 @@ class RepositorySearchController: UITableViewController, UISearchBarDelegate, Se
                 self.repositories = repositories
                 
             } catch let error as RepositorySearchError {
-                switch error {
-                case .percentEncodingFailed:
-                    print(error)
-                case .emptyWord:
-                    print(error)
-                case .urlCreationFailed:
-                    print(error)
-                case .repositoriesArrayEmptyError:
-                    let alert = UIAlertController(
-                        title: "検索結果",
-                        message: "0件",
-                        preferredStyle: .alert)
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                        alert.dismiss(animated: true)
-                    }
-                    self.present(alert, animated: true)
-                }
+                ErrorAlert(error: error).show(in: self)
             } catch {
                 print(error)
             }
