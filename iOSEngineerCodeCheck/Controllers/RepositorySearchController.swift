@@ -57,7 +57,7 @@ class RepositorySearchController: UITableViewController, UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
         // サーチバーに入力したテキストをプロパティにセットします.
-        guard let word = searchBar.text else { return }
+        guard let word = searchBar.text?.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) else { return }
         
         // 入力がなかった場合はリポジトリデータを取得しません.
         guard word.count != 0 else { return }
