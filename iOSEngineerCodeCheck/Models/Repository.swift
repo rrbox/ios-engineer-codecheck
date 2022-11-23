@@ -25,7 +25,7 @@ struct Repositories: Codable {
     var items: [Repository] = []
 }
 
-extension Repositories: Downloadable {
+extension Repositories: DefaultDownloadable {
     static func convert(from data: Data) throws -> Repositories {
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase

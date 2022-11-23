@@ -40,8 +40,8 @@ class RepositoryView: UIView {
         self.issuesLabel.text = repository.openIssuesCount
         
         Task {
-            try? await self.present(
-                image: repository.ownerImageURL.downloaded(),
+            await self.present(
+                image: try? repository.ownerImageURL.downloaded(),
                 defaultImage: UIImage(systemName: "person.circle"))
         }
     }

@@ -15,7 +15,7 @@ class iOSEngineerCodeCheckUITests: XCTestCase {
         
         // In UI tests it is usually best to stop immediately when a failure occurs.
         continueAfterFailure = false
-        
+        XCUIApplication().launch()
         // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
     }
     
@@ -25,8 +25,28 @@ class iOSEngineerCodeCheckUITests: XCTestCase {
     
     func testExample() throws {
         // UI tests must launch the application that they test.
+        
         let app = XCUIApplication()
-        app.launch()
+        app.tables["Empty list"].searchFields.containing(.button, identifier:"Clear text").element.tap()
+        
+        let sKey = app.keys["S"]
+        sKey.tap()
+        
+        let wKey = app.keys["w"]
+        wKey.tap()
+        
+        let iKey = app.keys["i"]
+        iKey.tap()
+        
+        let fKey = app.keys["f"]
+        fKey.tap()
+        
+        let tKey = app.keys["t"]
+        tKey.tap()
+        
+        app.buttons["Search"].tap()
+        app.tables.cells.containing(.staticText, identifier:"apple/swift").element.tap()
+        app.navigationBars["iOSEngineerCodeCheck.RepositoryView"].buttons["Root View Controller"].tap()
         
         // Use recording to get started writing UI tests.
         // Use XCTAssert and related functions to verify your tests produce the correct results.

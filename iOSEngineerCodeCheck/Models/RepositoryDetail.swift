@@ -7,9 +7,9 @@
 
 import UIKit
 
-extension Optional: Downloadable where Wrapped: UIImage {
-    static func convert(from data: Data) throws -> Optional<Wrapped> {
-        return Wrapped(data: data)
+extension UIImage: OptionalDonwloadable {
+    static func convert(from data: Data) throws -> Self? {
+        Self(data: data)
     }
 }
 
@@ -20,7 +20,7 @@ struct RepositoryDetailOutput {
     var watchersCount: String
     var forksCount: String
     var openIssuesCount: String
-    var ownerImageURL: ObjectDownload<UIImage?>
+    var ownerImageURL: ObjectDownload<UIImage>
 }
 
 extension RepositoryDetailOutput {
