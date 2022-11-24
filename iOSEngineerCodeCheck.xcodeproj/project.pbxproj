@@ -19,6 +19,7 @@
 		A4863E5E292E5FF8008AB13F /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4863E5D292E5FF8008AB13F /* Search.swift */; };
 		A4863E60292E69BC008AB13F /* ErrorAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4863E5F292E69BC008AB13F /* ErrorAlert.swift */; };
 		A4881772292FF08F0092C70C /* MarkdownViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4881771292FF08F0092C70C /* MarkdownViewController.swift */; };
+		A4881774292FF6F20092C70C /* ReadmeMetaData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4881773292FF6F20092C70C /* ReadmeMetaData.swift */; };
 		BF0A658D244F2A3B00280FA6 /* RepositoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0A658C244F2A3B00280FA6 /* RepositoryViewController.swift */; };
 		BFD945DF244DC5E80012785A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD945DE244DC5E80012785A /* AppDelegate.swift */; };
 		BFD945E1244DC5E80012785A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD945E0244DC5E80012785A /* SceneDelegate.swift */; };
@@ -60,6 +61,7 @@
 		A4863E5D292E5FF8008AB13F /* Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Search.swift; sourceTree = "<group>"; };
 		A4863E5F292E69BC008AB13F /* ErrorAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlert.swift; sourceTree = "<group>"; };
 		A4881771292FF08F0092C70C /* MarkdownViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownViewController.swift; sourceTree = "<group>"; };
+		A4881773292FF6F20092C70C /* ReadmeMetaData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadmeMetaData.swift; sourceTree = "<group>"; };
 		BF0A658C244F2A3B00280FA6 /* RepositoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryViewController.swift; sourceTree = "<group>"; };
 		BFD945DB244DC5E80012785A /* iOSEngineerCodeCheck.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSEngineerCodeCheck.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFD945DE244DC5E80012785A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 				A43326EF292A17FB00FDE19E /* Repository.swift */,
 				A4598D5C292CE99D00D9474A /* RepositoryDetail.swift */,
 				A4863E5D292E5FF8008AB13F /* Search.swift */,
+				A4881773292FF6F20092C70C /* ReadmeMetaData.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -355,6 +358,7 @@
 				A43326F0292A17FB00FDE19E /* Repository.swift in Sources */,
 				BFD945DF244DC5E80012785A /* AppDelegate.swift in Sources */,
 				A4863E5E292E5FF8008AB13F /* Search.swift in Sources */,
+				A4881774292FF6F20092C70C /* ReadmeMetaData.swift in Sources */,
 				A4359517292FB820006C9E14 /* ErrorAlert+Search.swift in Sources */,
 				BFD945E1244DC5E80012785A /* SceneDelegate.swift in Sources */,
 				A4881772292FF08F0092C70C /* MarkdownViewController.swift in Sources */,
