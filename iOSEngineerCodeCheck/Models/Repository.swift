@@ -8,10 +8,12 @@
 import Foundation
 
 struct Owner: Codable {
+    var login: String
     var avatarUrl: String
 }
 
 struct Repository: Codable {
+    var name: String
     var fullName: String
     var language: String?
     var stargazersCount: Int
