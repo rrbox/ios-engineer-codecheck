@@ -38,3 +38,9 @@ struct ReadmeMetaData: Decodable {
     }
 }
 
+extension ReadmeMetaData: DefaultDownloadable {
+    static func convert(from data: Data) throws -> ReadmeMetaData {
+        let decoder = JSONDecoder()
+        return try decoder.decode(ReadmeMetaData.self, from: data)
+    }
+}
