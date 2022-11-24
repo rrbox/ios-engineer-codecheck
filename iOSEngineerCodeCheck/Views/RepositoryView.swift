@@ -16,12 +16,12 @@ enum RepositoryLoadError: Error {
 class RepositoryView: UIView {
     
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var ownerImage: UIImageView!
     @IBOutlet weak var ownerLabel: UILabel!
     @IBOutlet weak var starsLabel: UILabel!
     @IBOutlet weak var forksLabel: UILabel!
     @IBOutlet weak var issuesLabel: UILabel!
     @IBOutlet weak var languageLabel: UILabel!
-    @IBOutlet weak var ownerImage: UIImageView!
     
     /// ViewController に画像を表示します.
     /// - Parameter image: UIImage
