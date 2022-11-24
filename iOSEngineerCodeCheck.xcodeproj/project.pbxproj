@@ -104,6 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				A4359513292FB789006C9E14 /* ObjectDownload.swift */,
+				A4863E5F292E69BC008AB13F /* ErrorAlert.swift */,
 			);
 			path = Commons;
 			sourceTree = "<group>";
@@ -142,7 +143,6 @@
 			children = (
 				A4598D55292BB19800D9474A /* RepositoryTableView.swift */,
 				A4598D51292B21BC00D9474A /* RepositoryView.swift */,
-				A4863E5F292E69BC008AB13F /* ErrorAlert.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
