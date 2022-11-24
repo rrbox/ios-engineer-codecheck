@@ -8,14 +8,8 @@
 
 import UIKit
 
-enum RepositoriesArrayGetError: Error {
-    case convertToDictionaryFailed
-    case getRepotioriesArrayFromDictionaryFailed
-    case taskFailed
-}
-
 /// Repository を検索し, 該当するリポジトリを一覧で表示するコントローラーです.
-class RepositorySearchController: UITableViewController, UISearchBarDelegate {
+class RepositorySearchController: UITableViewController, UISearchBarDelegate, SearchProtocol {
     
     @IBOutlet weak var searchBar: UISearchBar!
     
@@ -55,21 +49,14 @@ class RepositorySearchController: UITableViewController, UISearchBarDelegate {
     
     /// ユーザーが文字入力を終え, 検索を開始したときの処理です.
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        
-        // サーチバーに入力したテキストをプロパティにセットします.
-        guard let word = searchBar.text else { return }
-        
-        // 入力がなかった場合はリポジトリデータを取得しません.
-        guard word.count != 0 else { return }
-        
-        // URL を作成し, リポジトリの一覧の JSON を GET します.
-        guard let url = GitHubAPI.getSearchRepositoriesURL(query: word) else { return }
-        
         self.task = Task {
             do {
-                let repositories = try await ObjectDownload<Repositories>(url: url).downloaded()
+                let repositories = try await self.search(word: self.searchBar.text)
                 self.present(repositories: repositories)
                 self.repositories = repositories
+                
+            } catch let error as RepositorySearchError {
+                ErrorAlert(error: error).show(in: self)
             } catch {
                 print(error)
             }
