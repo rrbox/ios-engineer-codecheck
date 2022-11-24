@@ -375,7 +375,7 @@
         <!--README.md-->
         <scene sceneID="zhB-py-4yI">
             <objects>
-                <viewController id="6o1-9c-EjI" sceneMemberID="viewController">
+                <viewController id="6o1-9c-EjI" customClass="MarkdownViewController" customModule="iOSEngineerCodeCheck" customModuleProvider="target" sceneMemberID="viewController">
                     <wkWebView key="view" contentMode="scaleToFill" id="uwp-cj-Ym3">
                         <rect key="frame" x="0.0" y="0.0" width="430" height="932"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -386,6 +386,9 @@
                         </wkWebViewConfiguration>
                     </wkWebView>
                     <navigationItem key="navigationItem" title="README.md" id="Hr6-xK-6C9"/>
+                    <connections>
+                        <outlet property="webView" destination="uwp-cj-Ym3" id="Sl6-uM-klT"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4fu-33-VVt" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

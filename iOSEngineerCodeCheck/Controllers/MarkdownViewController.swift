@@ -7,9 +7,13 @@
 
 import WebKit
 
-class MarkdownViewController: UIViewController {
+class MarkdownViewController: UIViewController, WKNavigationDelegate {
+    
+    @IBOutlet weak var webView: WKWebView!
+    var inputRepository: Repository?
     
     override func viewDidLoad() {
+        
         
     }
     
