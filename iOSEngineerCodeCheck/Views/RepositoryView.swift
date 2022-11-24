@@ -15,29 +15,27 @@ enum RepositoryLoadError: Error {
 
 class RepositoryView: UIView {
     
-    @IBOutlet private weak var imageView: UIImageView!
-    @IBOutlet private weak var titleLabel: UILabel!
-    @IBOutlet private weak var languageLabel: UILabel!
-    @IBOutlet private weak var starsLabel: UILabel!
-    @IBOutlet private weak var watchersLabel: UILabel!
-    @IBOutlet private weak var forksLabel: UILabel!
-    @IBOutlet private weak var issuesLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var ownerLabel: UILabel!
+    @IBOutlet weak var starsLabel: UILabel!
+    @IBOutlet weak var forksLabel: UILabel!
+    @IBOutlet weak var issuesLabel: UILabel!
+    @IBOutlet weak var languageLabel: UILabel!
+    @IBOutlet weak var ownerImage: UIImageView!
     
     /// ViewController に画像を表示します.
     /// - Parameter image: UIImage
     private func present(image: UIImage?, defaultImage: UIImage? = UIImage(systemName: "exclamationmark.square.fill")) {
-        self.imageView.image = image ?? defaultImage
+        self.ownerImage.image = image ?? defaultImage
     }
     
-    /// リポジトリデータを表示するメソッドです.
     func present(repository: RepositoryDetailOutput) {
-        // リポジトリの要素を対応するプロパティで表示します.
-        self.titleLabel.text = repository.fullName
-        self.languageLabel.text = repository.language
+        self.titleLabel.text = repository.title
+        self.ownerLabel.text = repository.owner
         self.starsLabel.text = repository.stargazersCount
-        self.watchersLabel.text = repository.watchersCount
         self.forksLabel.text = repository.forksCount
         self.issuesLabel.text = repository.openIssuesCount
+        self.languageLabel.text = repository.language
         
         Task {
             await self.present(
