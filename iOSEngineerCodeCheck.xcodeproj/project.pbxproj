@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A42A2EB72930D1E100CDA5C5 /* JavaScriptCommad.swift in Sources */ = {isa = PBXBuildFile; fileRef = A42A2EB62930D1E100CDA5C5 /* JavaScriptCommad.swift */; };
+		A42A2EB92930D20B00CDA5C5 /* WebKit+ReadmeParse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A42A2EB82930D20B00CDA5C5 /* WebKit+ReadmeParse.swift */; };
 		A43326F0292A17FB00FDE19E /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A43326EF292A17FB00FDE19E /* Repository.swift */; };
 		A4359514292FB789006C9E14 /* ObjectDownload.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4359513292FB789006C9E14 /* ObjectDownload.swift */; };
 		A4359517292FB820006C9E14 /* ErrorAlert+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4359516292FB820006C9E14 /* ErrorAlert+Search.swift */; };
@@ -51,6 +53,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A42A2EB62930D1E100CDA5C5 /* JavaScriptCommad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JavaScriptCommad.swift; sourceTree = "<group>"; };
+		A42A2EB82930D20B00CDA5C5 /* WebKit+ReadmeParse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WebKit+ReadmeParse.swift"; sourceTree = "<group>"; };
 		A43326EF292A17FB00FDE19E /* Repository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repository.swift; sourceTree = "<group>"; };
 		A4359513292FB789006C9E14 /* ObjectDownload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectDownload.swift; sourceTree = "<group>"; };
 		A4359516292FB820006C9E14 /* ErrorAlert+Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ErrorAlert+Search.swift"; sourceTree = "<group>"; };
@@ -108,6 +112,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A42A2EB52930D1CD00CDA5C5 /* ReadmeInjection */ = {
+			isa = PBXGroup;
+			children = (
+				A42A2EB62930D1E100CDA5C5 /* JavaScriptCommad.swift */,
+				A42A2EB82930D20B00CDA5C5 /* WebKit+ReadmeParse.swift */,
+			);
+			path = ReadmeInjection;
+			sourceTree = "<group>";
+		};
 		A4359512292FB766006C9E14 /* Commons */ = {
 			isa = PBXGroup;
 			children = (
@@ -130,6 +143,7 @@
 		A4598D59292BDA7500D9474A /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				A42A2EB52930D1CD00CDA5C5 /* ReadmeInjection */,
 				A43326EF292A17FB00FDE19E /* Repository.swift */,
 				A4598D5C292CE99D00D9474A /* RepositoryDetail.swift */,
 				A4863E5D292E5FF8008AB13F /* Search.swift */,
@@ -375,6 +389,8 @@
 				A43326F0292A17FB00FDE19E /* Repository.swift in Sources */,
 				BFD945DF244DC5E80012785A /* AppDelegate.swift in Sources */,
 				A4863E5E292E5FF8008AB13F /* Search.swift in Sources */,
+				A42A2EB92930D20B00CDA5C5 /* WebKit+ReadmeParse.swift in Sources */,
+				A42A2EB72930D1E100CDA5C5 /* JavaScriptCommad.swift in Sources */,
 				A4881774292FF6F20092C70C /* ReadmeMetaData.swift in Sources */,
 				A4359517292FB820006C9E14 /* ErrorAlert+Search.swift in Sources */,
 				BFD945E1244DC5E80012785A /* SceneDelegate.swift in Sources */,

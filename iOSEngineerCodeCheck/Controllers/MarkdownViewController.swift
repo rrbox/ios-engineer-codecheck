@@ -27,7 +27,7 @@ class MarkdownViewController: UIViewController, WKNavigationDelegate {
     var inputRepository: Repository?
     
     /// HTML にリポジトリの README.md を埋め込むための JavaScript の関数を作成します.
-    func createJS(from repository: Repository) async throws -> String {
+    func createJS(from repository: Repository) async throws -> ReadmeInjectionCommand {
         guard let metadataURL = GitHubAPI.getReadmeURL(query: repository) else {
             throw ReadmeViewError.urlCreateFailed
         }
@@ -40,7 +40,7 @@ class MarkdownViewController: UIViewController, WKNavigationDelegate {
         
         let command = markdown.sanitized().injectionCommand()
             
-        return command.body
+        return command
         
     }
     
@@ -62,7 +62,7 @@ class MarkdownViewController: UIViewController, WKNavigationDelegate {
             do {
                 let js = try await self.createJS(from: repository)
                 DispatchQueue.main.async { [weak self] in
-                    self?.webView.evaluateJavaScript(js) {
+                    self?.webView.execute(js) {
                         if let error = $1 as? NSError {
                             ErrorAlert(error: error).show(in: self!)
                             print(error)
