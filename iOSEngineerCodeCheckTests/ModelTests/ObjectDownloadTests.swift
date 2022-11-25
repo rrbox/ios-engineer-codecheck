@@ -22,6 +22,7 @@ final class URLTestSession: URLProtocol {
         return request
     }
     
+    // URL に応じてレスポンスを変化させます.
     override func startLoading() {
         if let url = self.request.url,
            let data = Self.responses[url] {
@@ -76,6 +77,8 @@ final class ObjectDownloadTests: XCTestCase {
         // モックをConfigに登録
         let config = URLSessionConfiguration.ephemeral    // ephemeralでなく、defaultでもよい
         config.protocolClasses = [URLTestSession.self]
+        
+        // URLTestSession で定義された挙動を session に実行させます.
         self.session = URLSession(configuration: config)
     }
     
@@ -89,6 +92,8 @@ final class ObjectDownloadTests: XCTestCase {
                 XCTFail()
                 return
             }
+            
+            // ObjectDownload で url から直接文字列を取得します.
             guard let object = try await ObjectDownload<String>(url: url).downloaded(session) else {
                 XCTFail()
                 return
