@@ -12,6 +12,7 @@ protocol ErrorAlertCreate {
                 message: String?) -> UIAlertController
 }
 
+/// 一つの OK ボタンを備えたエラーアラートを作成する構造体です.
 struct SingleButtonErrorAlert: ErrorAlertCreate {
     func create(title: String? = "Error", message: String? = "description") -> UIAlertController {
         let alert = UIAlertController(
@@ -25,6 +26,7 @@ struct SingleButtonErrorAlert: ErrorAlertCreate {
     }
 }
 
+/// ボタンがなく, 時間で消えるエラーアラートを作成する構造体です.
 struct ButtonLessErrorAlert: ErrorAlertCreate {
     func create(title: String? = "Error", message: String? = "description") -> UIAlertController {
         let alert = UIAlertController(
@@ -38,10 +40,15 @@ struct ButtonLessErrorAlert: ErrorAlertCreate {
     }
 }
 
+/// エラーを表示可能にするプロトコルです.
 protocol PresentableError: Error {
+    
+    /// エラーを ``SingleButtonErrorAlert`` か ``ButtonLessErrorAlert`` で parent に表示します.
     func show(in parent: UIViewController)
+    
 }
 
+/// ``PresentableError`` が実装されたエラーを表示する機能を提供する構造体です.
 struct ErrorAlert<E: PresentableError> {
     var error: E
     func show(in parent: UIViewController) {
