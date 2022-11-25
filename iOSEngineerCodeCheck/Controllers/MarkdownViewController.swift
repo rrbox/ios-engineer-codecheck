@@ -34,26 +34,14 @@ class MarkdownViewController: UIViewController, WKNavigationDelegate {
         guard let markdown = try await ObjectDownload<ReadmeMetaData>(url: metadataURL)
             .downloaded()
             .downloadURL
-            .downloaded()?
-            .body else {
+            .downloaded() else {
             throw ReadmeViewError.jsCreateFailed
         }
         
-        let sanitized = sanitized(markdown)
+        let command = markdown.sanitized().injectionCommand()
             
-        return self.stringInjectionCommand(query: sanitized)
+        return command.body
         
-    }
-    
-    func sanitized(_ value: String) -> String {
-        return value
-            .replacingOccurrences(of: "\n", with: "\\n")
-            .replacingOccurrences(of: "\'", with: "\\'")
-            .replacingOccurrences(of: "\"", with: "\\\"")
-    }
-    
-    func stringInjectionCommand(query: String) -> String {
-        return "insert('\(query)');"
     }
     
     override func viewDidLoad() {

@@ -19,6 +19,31 @@ extension ReadmeData: OptionalDonwloadable {
     }
 }
 
+struct Sanitized {
+    let body: String
+}
+
+extension ReadmeData {
+    func sanitized() -> Sanitized {
+        return Sanitized(body: self.body
+            .replacingOccurrences(of: "\n", with: "\\n")
+            .replacingOccurrences(of: "\'", with: "\\'")
+            .replacingOccurrences(of: "\"", with: "\\\""))
+        
+    }
+    
+}
+
+struct ReadmeInjectionCommand {
+    let body: String
+}
+
+extension Sanitized {
+    func injectionCommand() -> ReadmeInjectionCommand {
+        return ReadmeInjectionCommand(body: "insert('\(self.body)');")
+    }
+}
+
 struct ReadmeMetaData: Decodable {
     var downloadURL: ObjectDownload<ReadmeData>
     
