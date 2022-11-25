@@ -38,13 +38,22 @@ class MarkdownViewController: UIViewController, WKNavigationDelegate {
             .body else {
             throw ReadmeViewError.jsCreateFailed
         }
-        let sanitized = markdown
+        
+        let sanitized = sanitized(markdown)
+            
+        return self.stringInjectionCommand(query: sanitized)
+        
+    }
+    
+    func sanitized(_ value: String) -> String {
+        return value
             .replacingOccurrences(of: "\n", with: "\\n")
             .replacingOccurrences(of: "\'", with: "\\'")
             .replacingOccurrences(of: "\"", with: "\\\"")
-        let js = "insert('\(sanitized)');"
-        return js
-        
+    }
+    
+    func stringInjectionCommand(query: String) -> String {
+        return "insert('\(query)');"
     }
     
     override func viewDidLoad() {
