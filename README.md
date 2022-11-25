@@ -25,10 +25,10 @@
 
 ||通常|ダークモード|
 |---|---|---|
-|検索|<img src = "https://user-images.githubusercontent.com/87851278/203947924-1fada1c6-2a40-48b6-a87f-7b6a0f9ef0a5.png" width = 320>
-|一覧|<img src = "https://user-images.githubusercontent.com/87851278/203948436-8f707060-b298-49c5-a58f-8626d3725e68.png" width = 320>
-|リポジトリ表示|<img scr = "https://user-images.githubusercontent.com/87851278/203948560-73953d50-7e4c-4fb2-92dd-8fe07f37ebd7.png" width = 320>
-|README.md表示|<img src = "https://user-images.githubusercontent.com/87851278/203948742-1ebca264-3dd8-455a-b0b7-45f050935483.png" width = 320>
+|検索|<img src = "https://user-images.githubusercontent.com/87851278/203950332-9d43ad74-1adc-4743-85c7-1144f8eeafe4.png" width = 320>|<img src = "https://user-images.githubusercontent.com/87851278/203947924-1fada1c6-2a40-48b6-a87f-7b6a0f9ef0a5.png" width = 320>|
+|一覧|<img src = "https://user-images.githubusercontent.com/87851278/203950352-798fd986-9552-4a1e-b3d5-c96cbb74a63c.png" width = 320>|<img src = "https://user-images.githubusercontent.com/87851278/203948436-8f707060-b298-49c5-a58f-8626d3725e68.png" width = 320>|
+|リポジトリ表示|<img src = "https://user-images.githubusercontent.com/87851278/203950368-aaffe0b7-b212-43bc-b8bc-7b64599fc453.png" width = 320>|<img src = "https://user-images.githubusercontent.com/87851278/203948560-73953d50-7e4c-4fb2-92dd-8fe07f37ebd7.png" width = 320>|
+|README.md表示|<img src = "https://user-images.githubusercontent.com/87851278/203950378-8ceaf742-b1ee-4a85-8e64-a066d8b9fad5.png" width = 320>|<img src = "https://user-images.githubusercontent.com/87851278/203948742-1ebca264-3dd8-455a-b0b7-45f050935483.png" width = 320>|
 
 </details>
 
