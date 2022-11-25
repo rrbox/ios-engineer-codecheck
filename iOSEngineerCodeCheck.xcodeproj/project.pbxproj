@@ -111,6 +111,7 @@
 		A4359512292FB766006C9E14 /* Commons */ = {
 			isa = PBXGroup;
 			children = (
+				A4598D57292BC8F200D9474A /* NetWork.swift */,
 				A4359513292FB789006C9E14 /* ObjectDownload.swift */,
 				A4863E5F292E69BC008AB13F /* ErrorAlert.swift */,
 			);
@@ -129,7 +130,6 @@
 		A4598D59292BDA7500D9474A /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				A4598D57292BC8F200D9474A /* NetWork.swift */,
 				A43326EF292A17FB00FDE19E /* Repository.swift */,
 				A4598D5C292CE99D00D9474A /* RepositoryDetail.swift */,
 				A4863E5D292E5FF8008AB13F /* Search.swift */,
