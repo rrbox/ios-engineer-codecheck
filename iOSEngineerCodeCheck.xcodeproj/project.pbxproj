@@ -141,6 +141,7 @@
 		A4598D5A292BDA9D00D9474A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				BFD945E4244DC5E80012785A /* Main.storyboard */,
 				A4359515292FB7FD006C9E14 /* RepositoriesSearch */,
 				BF0A658C244F2A3B00280FA6 /* RepositoryViewController.swift */,
 				A4881771292FF08F0092C70C /* MarkdownViewController.swift */,
@@ -206,7 +207,6 @@
 				A4598D59292BDA7500D9474A /* Models */,
 				BFD945DE244DC5E80012785A /* AppDelegate.swift */,
 				BFD945E0244DC5E80012785A /* SceneDelegate.swift */,
-				BFD945E4244DC5E80012785A /* Main.storyboard */,
 				BFD945E7244DC5EB0012785A /* Assets.xcassets */,
 				BFD945E9244DC5EB0012785A /* LaunchScreen.storyboard */,
 				BFD945EC244DC5EB0012785A /* Info.plist */,
