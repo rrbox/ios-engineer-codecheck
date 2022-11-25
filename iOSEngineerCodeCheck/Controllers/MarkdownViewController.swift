@@ -7,6 +7,7 @@
 
 import WebKit
 
+/// README ファイルを表示する際に想定されるエラーです.
 enum ReadmeViewError: Error {
     case urlCreateFailed
     case jsCreateFailed
@@ -19,28 +20,27 @@ extension NSError: PresentableError {
     
 }
 
+/// Markdown 形式のデータを WKWebView で表示するコントローラです.
 class MarkdownViewController: UIViewController, WKNavigationDelegate {
     
     @IBOutlet weak var webView: WKWebView!
     var inputRepository: Repository?
     
-    func createJS(from repository: Repository) async throws -> String {
+    /// HTML にリポジトリの README.md を埋め込むための JavaScript の関数を作成します.
+    func createJS(from repository: Repository) async throws -> ReadmeInjectionCommand {
         guard let metadataURL = GitHubAPI.getReadmeURL(query: repository) else {
             throw ReadmeViewError.urlCreateFailed
         }
         guard let markdown = try await ObjectDownload<ReadmeMetaData>(url: metadataURL)
             .downloaded()
             .downloadURL
-            .downloaded()?
-            .body else {
+            .downloaded() else {
             throw ReadmeViewError.jsCreateFailed
         }
-        let sanitized = markdown
-            .replacingOccurrences(of: "\n", with: "\\n")
-            .replacingOccurrences(of: "\'", with: "\\'")
-            .replacingOccurrences(of: "\"", with: "\\\"")
-        let js = "insert('\(sanitized)');"
-        return js
+        
+        let command = markdown.sanitized().injectionCommand()
+            
+        return command
         
     }
     
@@ -55,13 +55,14 @@ class MarkdownViewController: UIViewController, WKNavigationDelegate {
         
     }
     
+    /// HTML 読み込み後の処理です. JavaScript を実行して README.md を描画します.
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         guard let repository = self.inputRepository else { return }
         Task {
             do {
                 let js = try await self.createJS(from: repository)
                 DispatchQueue.main.async { [weak self] in
-                    self?.webView.evaluateJavaScript(js) {
+                    self?.webView.execute(js) {
                         if let error = $1 as? NSError {
                             ErrorAlert(error: error).show(in: self!)
                             print(error)

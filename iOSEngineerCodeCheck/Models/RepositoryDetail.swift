@@ -7,12 +7,14 @@
 
 import UIKit
 
+// UIImage に Downloadable を実装します.
 extension UIImage: OptionalDonwloadable {
     static func convert(from data: Data) throws -> Self? {
         Self(data: data)
     }
 }
 
+/// Repository を ``RepositoryView`` で表示する際に使用する構造体です.
 struct RepositoryDetailOutput {
     var title: String
     var owner: String

@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// GitHub API の URL を提供する名前空間です.
 enum GitHubAPI {
     /// リポジトリを検索するクエリを生成するメソッドです.
     static func getSearchRepositoriesURL(query: String) -> URL? {

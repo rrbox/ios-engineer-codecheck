@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// README.md をダウンロードする際に使用する構造体です. ダウンロードは ``ObjectDownload`` を使用します.
 struct ReadmeData {
     var body: String
 }

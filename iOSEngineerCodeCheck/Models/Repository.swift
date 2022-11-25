@@ -7,11 +7,13 @@
 
 import Foundation
 
+/// リポジトリ JSON の owner のデータをデコードできる構造体です.
 struct Owner: Codable {
     var login: String
     var avatarUrl: String
 }
 
+/// リポジトリ JSON をデコードできる構造体です.
 struct Repository: Codable {
     var name: String
     var fullName: String
@@ -23,10 +25,12 @@ struct Repository: Codable {
     var owner: Owner
 }
 
+/// リポジトリ配列 JSON をデコードできる構造体です.
 struct Repositories: Codable {
     var items: [Repository] = []
 }
 
+// Repositories に Downloadable を実装します.
 extension Repositories: DefaultDownloadable {
     static func convert(from data: Data) throws -> Repositories {
         let decoder = JSONDecoder()
