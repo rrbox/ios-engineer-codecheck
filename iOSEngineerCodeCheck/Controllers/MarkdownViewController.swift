@@ -35,7 +35,11 @@ class MarkdownViewController: UIViewController, WKNavigationDelegate {
             .body else {
             throw ReadmeViewError.jsCreateFailed
         }
-        let js = "insert('\(markdown.replacingOccurrences(of: "\n", with: "\\n"))');"
+        let sanitized = markdown
+            .replacingOccurrences(of: "\n", with: "\\n")
+            .replacingOccurrences(of: "\'", with: "\\'")
+            .replacingOccurrences(of: "\"", with: "\\\"")
+        let js = "insert('\(sanitized)');"
         return js
         
     }
@@ -60,6 +64,7 @@ class MarkdownViewController: UIViewController, WKNavigationDelegate {
                     self?.webView.evaluateJavaScript(js) {
                         if let error = $1 as? NSError {
                             ErrorAlert(error: error).show(in: self!)
+                            print(error)
                         }
                     }
                 }

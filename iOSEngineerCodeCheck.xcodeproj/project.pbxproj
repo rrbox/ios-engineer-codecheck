@@ -20,9 +20,9 @@
 		A4863E60292E69BC008AB13F /* ErrorAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4863E5F292E69BC008AB13F /* ErrorAlert.swift */; };
 		A4881772292FF08F0092C70C /* MarkdownViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4881771292FF08F0092C70C /* MarkdownViewController.swift */; };
 		A4881774292FF6F20092C70C /* ReadmeMetaData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4881773292FF6F20092C70C /* ReadmeMetaData.swift */; };
-		A4881779293003210092C70C /* github-markdown.css in Resources */ = {isa = PBXBuildFile; fileRef = A4881776293003210092C70C /* github-markdown.css */; };
 		A488177A293003210092C70C /* marked.min.js in Resources */ = {isa = PBXBuildFile; fileRef = A4881777293003210092C70C /* marked.min.js */; };
 		A488177B293003210092C70C /* md.html in Resources */ = {isa = PBXBuildFile; fileRef = A4881778293003210092C70C /* md.html */; };
+		A48817812930A8800092C70C /* github-markdown-light.css in Resources */ = {isa = PBXBuildFile; fileRef = A48817802930A8800092C70C /* github-markdown-light.css */; };
 		BF0A658D244F2A3B00280FA6 /* RepositoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF0A658C244F2A3B00280FA6 /* RepositoryViewController.swift */; };
 		BFD945DF244DC5E80012785A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD945DE244DC5E80012785A /* AppDelegate.swift */; };
 		BFD945E1244DC5E80012785A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD945E0244DC5E80012785A /* SceneDelegate.swift */; };
@@ -64,9 +64,9 @@
 		A4863E5F292E69BC008AB13F /* ErrorAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlert.swift; sourceTree = "<group>"; };
 		A4881771292FF08F0092C70C /* MarkdownViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownViewController.swift; sourceTree = "<group>"; };
 		A4881773292FF6F20092C70C /* ReadmeMetaData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadmeMetaData.swift; sourceTree = "<group>"; };
-		A4881776293003210092C70C /* github-markdown.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = "github-markdown.css"; sourceTree = "<group>"; };
 		A4881777293003210092C70C /* marked.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = marked.min.js; sourceTree = "<group>"; };
 		A4881778293003210092C70C /* md.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = md.html; sourceTree = "<group>"; };
+		A48817802930A8800092C70C /* github-markdown-light.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = "github-markdown-light.css"; sourceTree = "<group>"; };
 		BF0A658C244F2A3B00280FA6 /* RepositoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryViewController.swift; sourceTree = "<group>"; };
 		BFD945DB244DC5E80012785A /* iOSEngineerCodeCheck.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iOSEngineerCodeCheck.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFD945DE244DC5E80012785A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -171,7 +171,7 @@
 		A4881775293002FD0092C70C /* MarkdownView */ = {
 			isa = PBXGroup;
 			children = (
-				A4881776293003210092C70C /* github-markdown.css */,
+				A48817802930A8800092C70C /* github-markdown-light.css */,
 				A4881777293003210092C70C /* marked.min.js */,
 				A4881778293003210092C70C /* md.html */,
 			);
@@ -336,9 +336,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A48817812930A8800092C70C /* github-markdown-light.css in Resources */,
 				A488177A293003210092C70C /* marked.min.js in Resources */,
 				BFD945EB244DC5EB0012785A /* LaunchScreen.storyboard in Resources */,
-				A4881779293003210092C70C /* github-markdown.css in Resources */,
 				A488177B293003210092C70C /* md.html in Resources */,
 				BFD945E8244DC5EB0012785A /* Assets.xcassets in Resources */,
 				BFD945E6244DC5E80012785A /* Main.storyboard in Resources */,
