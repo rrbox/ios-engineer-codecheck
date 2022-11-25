@@ -23,9 +23,20 @@ class RepositoryViewController: UIViewController {
         guard let repository = self.selectedRepository else { return }
         
         do {
-            self.repositoryView.present(repository: try RepositoryDetailOutput(from: repository))
+            self.repositoryView
+                .present(repository: try RepositoryDetailOutput(from: repository))
         } catch {
             print(error)
+        }
+        
+    }
+    
+    /// 画面遷移することを次の ViewController に通知します.
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "Readme" {
+            let destination = segue.destination as! MarkdownViewController
+            destination.inputRepository = self.selectedRepository
         }
         
     }

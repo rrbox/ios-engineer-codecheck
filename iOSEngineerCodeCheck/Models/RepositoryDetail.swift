@@ -14,7 +14,8 @@ extension UIImage: OptionalDonwloadable {
 }
 
 struct RepositoryDetailOutput {
-    var fullName: String
+    var title: String
+    var owner: String
     var language: String
     var stargazersCount: String
     var watchersCount: String
@@ -25,12 +26,13 @@ struct RepositoryDetailOutput {
 
 extension RepositoryDetailOutput {
     init(from repository: Repository) throws {
-        self.fullName = repository.fullName
-        self.language = "Written in \(repository.language ?? "other")"
-        self.stargazersCount = "\(repository.stargazersCount) stars"
-        self.watchersCount = "\(repository.watchersCount) watchers"
-        self.forksCount = "\(repository.forksCount) forks"
-        self.openIssuesCount = "\(repository.openIssuesCount) open issues"
+        self.title = repository.name
+        self.owner = repository.owner.login
+        self.language = "\(repository.language ?? "other")"
+        self.stargazersCount = "\(repository.stargazersCount)"
+        self.watchersCount = "\(repository.watchersCount)"
+        self.forksCount = "\(repository.forksCount)"
+        self.openIssuesCount = "\(repository.openIssuesCount)"
         guard let url = URL(string: repository.owner.avatarUrl) else {
             throw RepositoryLoadError.imageURLLoadFailed
         }
