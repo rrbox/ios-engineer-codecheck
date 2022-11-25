@@ -116,7 +116,6 @@ final class ObjectDownloadTests: XCTestCase {
             XCTFail("\(error)")
         }
         
-        
     }
     
 }

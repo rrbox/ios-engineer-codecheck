@@ -27,6 +27,8 @@ class RepositoryView: UIView {
     /// - Parameter image: UIImage
     private func present(image: UIImage?, defaultImage: UIImage? = UIImage(systemName: "exclamationmark.square.fill")) {
         self.ownerImage.image = image ?? defaultImage
+        self.ownerImage.layer.cornerRadius = 10
+        self.ownerImage.layer.masksToBounds = true
     }
     
     func present(repository: RepositoryDetailOutput) {
