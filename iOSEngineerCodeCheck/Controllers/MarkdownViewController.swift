@@ -36,7 +36,6 @@ class MarkdownViewController: UIViewController, WKNavigationDelegate {
             throw ReadmeViewError.jsCreateFailed
         }
         let js = "insert('\(markdown.replacingOccurrences(of: "\n", with: "\\n"))');"
-        //        let js = "insert('\(markdown)');"
         return js
         
     }
@@ -64,8 +63,8 @@ class MarkdownViewController: UIViewController, WKNavigationDelegate {
                         }
                     }
                 }
-            } catch {
-                fatalError("\(error)")
+            } catch let error as NSError {
+                ErrorAlert(error: error).show(in: self)
             }
         }
     }
