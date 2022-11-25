@@ -12,6 +12,13 @@ enum ReadmeViewError: Error {
     case jsCreateFailed
 }
 
+extension NSError: PresentableError {
+    func show(in parent: UIViewController) {
+        parent.present(ButtonLessErrorAlert().create(message: self.localizedDescription), animated: true)
+    }
+    
+}
+
 class MarkdownViewController: UIViewController, WKNavigationDelegate {
     
     @IBOutlet weak var webView: WKWebView!
@@ -51,7 +58,11 @@ class MarkdownViewController: UIViewController, WKNavigationDelegate {
             do {
                 let js = try await self.createJS(from: repository)
                 DispatchQueue.main.async { [weak self] in
-                    self?.webView.evaluateJavaScript(js)
+                    self?.webView.evaluateJavaScript(js) {
+                        if let error = $1 as? NSError {
+                            ErrorAlert(error: error).show(in: self!)
+                        }
+                    }
                 }
             } catch {
                 fatalError("\(error)")
