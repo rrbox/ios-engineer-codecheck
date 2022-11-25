@@ -7,6 +7,7 @@
 
 import WebKit
 
+/// README ファイルを表示する際に想定されるエラーです.
 enum ReadmeViewError: Error {
     case urlCreateFailed
     case jsCreateFailed
@@ -19,11 +20,13 @@ extension NSError: PresentableError {
     
 }
 
+/// Markdown 形式のデータを WKWebView で表示するコントローラです.
 class MarkdownViewController: UIViewController, WKNavigationDelegate {
     
     @IBOutlet weak var webView: WKWebView!
     var inputRepository: Repository?
     
+    /// HTML にリポジトリの README.md を埋め込むための JavaScript の関数を作成します.
     func createJS(from repository: Repository) async throws -> String {
         guard let metadataURL = GitHubAPI.getReadmeURL(query: repository) else {
             throw ReadmeViewError.urlCreateFailed
@@ -55,6 +58,7 @@ class MarkdownViewController: UIViewController, WKNavigationDelegate {
         
     }
     
+    /// HTML 読み込み後の処理です. JavaScript を実行して README.md を描画します.
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         guard let repository = self.inputRepository else { return }
         Task {
