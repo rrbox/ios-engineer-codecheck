@@ -13,6 +13,7 @@ enum RepositoryLoadError: Error {
     case imageURLLoadFailed
 }
 
+/// リポジトリの詳細を表示するビューです.
 class RepositoryView: UIView {
     
     @IBOutlet weak var titleLabel: UILabel!
@@ -31,6 +32,7 @@ class RepositoryView: UIView {
         self.ownerImage.layer.masksToBounds = true
     }
     
+    /// リポジトリの詳細データを表示します.
     func present(repository: RepositoryDetailOutput) {
         self.titleLabel.text = repository.title
         self.ownerLabel.text = repository.owner

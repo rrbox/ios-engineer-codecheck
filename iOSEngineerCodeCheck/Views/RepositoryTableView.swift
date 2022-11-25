@@ -7,7 +7,10 @@
 
 import UIKit
 
+/// リポジトリを一覧表示するためのセルです.
 class RepositoryCell: UITableViewCell {
+    
+    /// リポジトリをこのセルに表示します.
     func present(repository: Repository, cellForRowAt indexPath: IndexPath) {
         self.tag = indexPath.row
         var content = UIListContentConfiguration.valueCell()
@@ -15,11 +18,14 @@ class RepositoryCell: UITableViewCell {
         content.secondaryText = repository.language
         self.contentConfiguration = content
     }
+    
 }
 
+/// リポジトリを一覧で表示します.
 class RepositoryTableView: UITableView, UITableViewDataSource {
     private var repositories: [Repository] = []
     
+    /// リポジトリの配列をテーブルにマッピングします.
     func present(repositories: [Repository]) {
         self.repositories = repositories
         DispatchQueue.main.async {
