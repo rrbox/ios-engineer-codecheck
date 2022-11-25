@@ -7,11 +7,13 @@
 
 import Foundation
 
+/// 検索処理を行うためのプロトコルです.
 protocol SearchProtocol {
     associatedtype ResultType
     func search(word: String?) async throws -> ResultType
 }
 
+/// 検索処理で想定されるエラーです.
 enum RepositorySearchError: Error {
     case percentEncodingFailed
     case emptyWord
