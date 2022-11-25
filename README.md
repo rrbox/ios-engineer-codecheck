@@ -1,5 +1,37 @@
 # 株式会社ゆめみ iOS エンジニアコードチェック課題
 
+## アプリ仕様
+
+このアプリは GitHub のリポジトリーを検索するアプリです。
+
+## 環境
+
+- IDE : Xcode 14.1
+- Swift バージョン : Swift 5.7
+- 開発ターゲット : iOS 16.1
+- サードパーティのライブラリ
+    - [Marked](https://github.com/markedjs/marked)
+    - [GitHub-markdown.css](https://github.com/sindresorhus/github-markdown-css)
+
+### 動作
+
+1. サーチバーにキーワードを入力
+2. GitHub API（`search/repositories`）でリポジトリーを検索し、結果一覧を概要（リポジトリ名）で表示
+3. 特定の結果を選択したら、該当リポジトリの詳細（リポジトリ名、オーナーアイコン、プロジェクト言語、Star 数、Watcher 数、Fork 数、Issue 数）を表示
+4. そのページの README.md ボタンをタップ
+5. そのリポジトリの README.md を表示
+
+### 課題の進め方(PR, Issue の扱い方)について
+
+- 課題用の issue を用意していただきましたが, 新しく自分で issue を立て, 自分の立てた issue を中心に作業を進めました.
+- 変更は全て develop ブランチへマージし, main ブランチは提出時まで保持し続けています. 従って, 全ての変更の流れを見たい場合は, [Develop PR](https://github.com/rrbox/ios-engineer-codecheck/pull/17) から確認できます.
+- また自分で立てた issue のみの [milestone](https://github.com/rrbox/ios-engineer-codecheck/milestone/2) を作成しています. close された issue は時間に沿って並んでいるはずなのでそちらも参考にしていただければと思います.
+- この README.md を書き終えた時点で develop をマージし, 課題の issue は最後のチェックに利用したいと思います.
+
+---
+
+<details><summary>課題の詳細</summary>
+
 ## 概要
 
 本プロジェクトは株式会社ゆめみ（以下弊社）が、弊社に iOS エンジニアを希望する方に出す課題のベースプロジェクトです。本課題が与えられた方は、下記の概要を詳しく読んだ上で課題を取り組んでください。
@@ -44,3 +76,5 @@ Issues を確認した上、本プロジェクトを [**Duplicate** してくだ
 
 提出された課題の評価ポイントに関しては、[こちらの記事](https://qiita.com/lovee/items/d76c68341ec3e7beb611)に詳しく書かれてありますので、ぜひご覧ください。
 ライブラリの利用に関しては [こちらの記事](https://qiita.com/ykws/items/b951a2e24ca85013e722)も参照ください。
+
+</details>
